@@ -21,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fazlaka.app.analytics.AnalyticsTracker
 import com.fazlaka.app.analytics.Screens
 import com.fazlaka.app.core.location.LocationProvider
+import com.fazlaka.app.ui.components.ForceUpdateOverlay
 import com.fazlaka.app.ui.components.UpdateDialog
 import com.fazlaka.app.ui.navigation.FazlakaNavGraph
 import com.fazlaka.app.ui.theme.FazlakaTheme
@@ -81,20 +82,30 @@ class MainActivity : ComponentActivity() {
 
             val updateViewModel: UpdateViewModel = hiltViewModel()
             val updateState by updateViewModel.updateState.collectAsStateWithLifecycle()
+            val updateInfo = updateViewModel.currentUpdateInfo.collectAsStateWithLifecycle().value
 
             LaunchedEffect(Unit) {
                 updateViewModel.checkForUpdates()
             }
 
-            val isForceUpdate = updateInfo?.forceUpdate == true &&
-                updateState is UpdateState.Available
+            val isForceBlocking = updateInfo?.forceUpdate == true &&
+                updateState !is UpdateState.UpToDate &&
+                updateState !is UpdateState.Idle
 
             FazlakaTheme(darkTheme = sessionState.darkMode) {
-                if (isForceUpdate) {
-                    FazlakaNavGraph(
-                        startDestination = com.fazlaka.app.ui.navigation.Routes.LOGIN,
-                        notificationData = null,
-                        onNotificationHandled = {},
+                if (isForceBlocking) {
+                    ForceUpdateOverlay(
+                        updateInfo = updateInfo,
+                        currentVersion = updateViewModel.currentVersion,
+                        isDownloading = updateState is UpdateState.Downloading ||
+                            updateState is UpdateState.DownloadProgress ||
+                            updateState is UpdateState.Installing,
+                        downloadProgress = when (updateState) {
+                            is UpdateState.DownloadProgress -> updateState.progress
+                            is UpdateState.Downloading -> 0
+                            else -> 0
+                        },
+                        onDownload = { updateViewModel.downloadAndInstall() },
                     )
                 } else {
                     val startDestination = remember(sessionState.isLoggedIn, sessionState.onboarded) {
@@ -109,22 +120,25 @@ class MainActivity : ComponentActivity() {
                         notificationData = pendingNotificationData,
                         onNotificationHandled = { pendingNotificationData = null },
                     )
-                }
 
-                val showUpdateDialog = updateState is UpdateState.Available ||
-                    updateState is UpdateState.Downloading ||
-                    updateState is UpdateState.DownloadProgress
-
-                if (showUpdateDialog && updateInfo != null) {
-                    UpdateDialog(
-                        updateInfo = updateInfo,
-                        currentVersion = updateViewModel.currentVersion,
-                        onDownload = { updateViewModel.downloadAndInstall() },
-                        onDismiss = { updateViewModel.checkForUpdates() },
-                        onSkip = { updateViewModel.checkForUpdates() },
-                        isDownloading = updateState is UpdateState.Downloading || updateState is UpdateState.DownloadProgress,
-                        downloadProgress = if (updateState is UpdateState.DownloadProgress) updateState.progress else 0f,
-                    )
+                    if (updateInfo != null && !updateInfo.forceUpdate) {
+                        val showDialog = updateState is UpdateState.Available
+                        if (showDialog) {
+                            UpdateDialog(
+                                updateInfo = updateInfo,
+                                currentVersion = updateViewModel.currentVersion,
+                                onDownload = { updateViewModel.downloadAndInstall() },
+                                onDismiss = { updateViewModel.dismiss() },
+                                onSkip = { updateViewModel.dismiss() },
+                                isDownloading = updateState is UpdateState.Downloading ||
+                                    updateState is UpdateState.DownloadProgress,
+                                downloadProgress = when (updateState) {
+                                    is UpdateState.DownloadProgress -> updateState.progress / 100f
+                                    else -> 0f
+                                },
+                            )
+                        }
+                    }
                 }
             }
         }

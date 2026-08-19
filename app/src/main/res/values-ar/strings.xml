@@ -3,6 +3,8 @@
     <string name="app_name">فذلكة</string>
     <string name="notification_channel_media">تشغيل الوسائط</string>
     <string name="notification_channel_general">الإشعارات</string>
+    <string name="notification_channel_update">تحديث التطبيق</string>
+    <string name="notification_channel_update_desc">تنزيل تحديثات التطبيق</string>
     <string name="notification_channel_messages">الرسائل</string>
     <string name="notification_channel_social">التفاعل الاجتماعي</string>
     <string name="notification_channel_content">تحديثات المحتوى</string>
@@ -192,6 +194,7 @@
 
     <!-- Update -->
     <string name="update_title">تحديث جديد متاح</string>
+    <string name="update_required_title">تحديث مطلوب</string>
     <string name="update_version_format">الإصدار %1$s → %2$s</string>
     <string name="update_release_notes">ملاحظات الإصدار</string>
     <string name="update_downloading_format">جارٍ التحميل… %1$d%%</string>

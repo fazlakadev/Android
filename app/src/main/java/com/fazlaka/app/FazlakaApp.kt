@@ -92,8 +92,17 @@ class FazlakaApp : Application(), ImageLoaderFactory {
             setShowBadge(true)
         }
 
+        val updateChannel = NotificationChannel(
+            CHANNEL_UPDATE,
+            getString(R.string.notification_channel_update),
+            NotificationManager.IMPORTANCE_LOW,
+        ).apply {
+            description = getString(R.string.notification_channel_update_desc)
+            setShowBadge(false)
+        }
+
         manager.createNotificationChannels(
-            listOf(mediaChannel, messagesChannel, socialChannel, contentChannel, generalChannel)
+            listOf(mediaChannel, messagesChannel, socialChannel, contentChannel, generalChannel, updateChannel)
         )
     }
 
@@ -103,5 +112,6 @@ class FazlakaApp : Application(), ImageLoaderFactory {
         const val CHANNEL_SOCIAL = "social"
         const val CHANNEL_CONTENT = "content"
         const val CHANNEL_GENERAL = "general"
+        const val CHANNEL_UPDATE = "update_download"
     }
 }

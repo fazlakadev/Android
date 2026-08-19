@@ -3,6 +3,8 @@
     <string name="app_name">فذلكة</string>
     <string name="notification_channel_media">تشغيل الوسائط</string>
     <string name="notification_channel_general">الإشعارات</string>
+    <string name="notification_channel_update">تحديث التطبيق</string>
+    <string name="notification_channel_update_desc">تنزيل تحديثات التطبيق</string>
     <string name="notification_channel_messages">الرسائل</string>
     <string name="notification_channel_social">التفاعل الاجتماعي</string>
     <string name="notification_channel_content">تحديثات المحتوى</string>
