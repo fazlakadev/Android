@@ -22,6 +22,7 @@ val FazlakaBackground = Color(0xFF0B0F19)
 val FazlakaSurfaceDark = Color(0xFF1F2937)
 val FazlakaError = Color(0xFFEF4444)
 val FazlakaSuccess = Color(0xFF10B981)
+val FazlakaWarning = Color(0xFFF59E0B)
 
 // Modern brand gradient
 val FazlakaGradientStart = Color(0xFF8B5CF6)

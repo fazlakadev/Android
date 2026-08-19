@@ -14,6 +14,9 @@ data class UpdateInfo(
     val releaseNotes: String,
     val downloadUrl: String,
     val publishedAt: String,
+    val forceUpdate: Boolean,
+    val forceUpdateMessage: String?,
+    val minVersion: String?,
 )
 
 @Singleton
@@ -48,13 +51,21 @@ class UpdateChecker @Inject constructor(
             val data = response.data
             val remoteVersion = data.version
             val localVersion = getCurrentVersion()
+            val forceUpdate = data.forceUpdate
+            val minVersion = data.minVersion
 
-            if (isNewerVersion(remoteVersion, localVersion)) {
+            val belowMin = minVersion != null && isNewerVersion(minVersion, localVersion)
+            val hasUpdate = isNewerVersion(remoteVersion, localVersion)
+
+            if (hasUpdate || belowMin) {
                 UpdateInfo(
                     version = data.version,
                     releaseNotes = data.releaseNotes,
                     downloadUrl = data.downloadUrl,
                     publishedAt = data.publishedAt,
+                    forceUpdate = forceUpdate || belowMin,
+                    forceUpdateMessage = data.forceUpdateMessage,
+                    minVersion = data.minVersion,
                 )
             } else {
                 null

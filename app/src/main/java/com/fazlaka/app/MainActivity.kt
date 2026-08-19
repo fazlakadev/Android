@@ -86,36 +86,45 @@ class MainActivity : ComponentActivity() {
                 updateViewModel.checkForUpdates()
             }
 
-            FazlakaTheme(darkTheme = sessionState.darkMode) {
-                val startDestination = remember(sessionState.isLoggedIn, sessionState.onboarded) {
-                    when {
-                        sessionState.isLoggedIn -> com.fazlaka.app.ui.navigation.Routes.MAIN
-                        sessionState.onboarded -> com.fazlaka.app.ui.navigation.Routes.LOGIN
-                        else -> com.fazlaka.app.ui.navigation.Routes.ONBOARDING
-                    }
-                }
-                FazlakaNavGraph(
-                    startDestination = startDestination,
-                    notificationData = pendingNotificationData,
-                    onNotificationHandled = { pendingNotificationData = null },
-                )
+            val isForceUpdate = updateInfo?.forceUpdate == true &&
+                updateState is UpdateState.Available
 
-                val updateInfo = updateViewModel.currentUpdateInfo.collectAsStateWithLifecycle().value
-                when (val state = updateState) {
-                    is UpdateState.Available, is UpdateState.Downloading, is UpdateState.DownloadProgress -> {
-                        if (updateInfo != null) {
-                            UpdateDialog(
-                                updateInfo = updateInfo,
-                                currentVersion = updateViewModel.currentVersion,
-                                onDownload = { updateViewModel.downloadAndInstall() },
-                                onDismiss = { updateViewModel.dismissUpdate() },
-                                onSkip = { updateViewModel.skipVersion() },
-                                isDownloading = state is UpdateState.Downloading || state is UpdateState.DownloadProgress,
-                                downloadProgress = if (state is UpdateState.DownloadProgress) state.progress else 0f,
-                            )
+            FazlakaTheme(darkTheme = sessionState.darkMode) {
+                if (isForceUpdate) {
+                    FazlakaNavGraph(
+                        startDestination = com.fazlaka.app.ui.navigation.Routes.LOGIN,
+                        notificationData = null,
+                        onNotificationHandled = {},
+                    )
+                } else {
+                    val startDestination = remember(sessionState.isLoggedIn, sessionState.onboarded) {
+                        when {
+                            sessionState.isLoggedIn -> com.fazlaka.app.ui.navigation.Routes.MAIN
+                            sessionState.onboarded -> com.fazlaka.app.ui.navigation.Routes.LOGIN
+                            else -> com.fazlaka.app.ui.navigation.Routes.ONBOARDING
                         }
                     }
-                    else -> {}
+                    FazlakaNavGraph(
+                        startDestination = startDestination,
+                        notificationData = pendingNotificationData,
+                        onNotificationHandled = { pendingNotificationData = null },
+                    )
+                }
+
+                val showUpdateDialog = updateState is UpdateState.Available ||
+                    updateState is UpdateState.Downloading ||
+                    updateState is UpdateState.DownloadProgress
+
+                if (showUpdateDialog && updateInfo != null) {
+                    UpdateDialog(
+                        updateInfo = updateInfo,
+                        currentVersion = updateViewModel.currentVersion,
+                        onDownload = { updateViewModel.downloadAndInstall() },
+                        onDismiss = { updateViewModel.checkForUpdates() },
+                        onSkip = { updateViewModel.checkForUpdates() },
+                        isDownloading = updateState is UpdateState.Downloading || updateState is UpdateState.DownloadProgress,
+                        downloadProgress = if (updateState is UpdateState.DownloadProgress) updateState.progress else 0f,
+                    )
                 }
             }
         }

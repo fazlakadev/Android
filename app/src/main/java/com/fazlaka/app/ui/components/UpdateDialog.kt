@@ -18,7 +18,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.fazlaka.app.R
 import com.fazlaka.app.core.update.UpdateInfo
 import com.fazlaka.app.ui.theme.FazlakaSuccess
+import com.fazlaka.app.ui.theme.FazlakaWarning
 
 @Composable
 fun UpdateDialog(
@@ -40,8 +40,10 @@ fun UpdateDialog(
     isDownloading: Boolean = false,
     downloadProgress: Float = 0f,
 ) {
+    val mandatory = updateInfo.forceUpdate
+
     AlertDialog(
-        onDismissRequest = { if (!isDownloading) onDismiss() },
+        onDismissRequest = { if (!mandatory && !isDownloading) onDismiss() },
         shape = RoundedCornerShape(24.dp),
         containerColor = MaterialTheme.colorScheme.surface,
         title = {
@@ -51,17 +53,21 @@ fun UpdateDialog(
             ) {
                 Surface(
                     shape = RoundedCornerShape(16.dp),
-                    color = FazlakaSuccess.copy(alpha = 0.12f),
+                    color = if (mandatory) FazlakaWarning.copy(alpha = 0.12f) else FazlakaSuccess.copy(alpha = 0.12f),
                     modifier = Modifier.padding(bottom = 12.dp),
                 ) {
                     Text(
-                        text = "🚀",
+                        text = if (mandatory) "⚠️" else "🚀",
                         style = MaterialTheme.typography.headlineLarge,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                     )
                 }
                 Text(
-                    text = stringResource(R.string.update_title),
+                    text = if (mandatory) {
+                        stringResource(R.string.update_required_title)
+                    } else {
+                        stringResource(R.string.update_title)
+                    },
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
@@ -77,6 +83,22 @@ fun UpdateDialog(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
                 )
+                if (mandatory && !updateInfo.forceUpdateMessage.isNullOrBlank()) {
+                    Spacer(Modifier.height(8.dp))
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = FazlakaWarning.copy(alpha = 0.08f),
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(
+                            text = updateInfo.forceUpdateMessage,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = FazlakaWarning,
+                            modifier = Modifier.padding(10.dp),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
             }
         },
         text = {
@@ -125,7 +147,7 @@ fun UpdateDialog(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(6.dp),
-                            color = FazlakaSuccess,
+                            color = if (mandatory) FazlakaWarning else FazlakaSuccess,
                             trackColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                         )
                         Spacer(Modifier.height(4.dp))
@@ -139,7 +161,7 @@ fun UpdateDialog(
                 enabled = !isDownloading,
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = FazlakaSuccess,
+                    containerColor = if (mandatory) FazlakaWarning else FazlakaSuccess,
                 ),
                 modifier = Modifier.fillMaxWidth(),
             ) {
@@ -159,28 +181,30 @@ fun UpdateDialog(
             }
         },
         dismissButton = {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                TextButton(
-                    onClick = onDismiss,
-                    enabled = !isDownloading,
+            if (!mandatory) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
-                    Text(
-                        text = stringResource(R.string.update_later),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-                TextButton(
-                    onClick = onSkip,
-                    enabled = !isDownloading,
-                ) {
-                    Text(
-                        text = stringResource(R.string.update_skip),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                    )
+                    androidx.compose.material3.TextButton(
+                        onClick = onDismiss,
+                        enabled = !isDownloading,
+                    ) {
+                        Text(
+                            text = stringResource(R.string.update_later),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    androidx.compose.material3.TextButton(
+                        onClick = onSkip,
+                        enabled = !isDownloading,
+                    ) {
+                        Text(
+                            text = stringResource(R.string.update_skip),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                        )
+                    }
                 }
             }
         },

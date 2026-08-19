@@ -388,6 +388,7 @@
 
     <!-- Update -->
     <string name="update_title">تحديث جديد متاح</string>
+    <string name="update_required_title">تحديث مطلوب</string>
     <string name="update_version_format">الإصدار %1$s → %2$s</string>
     <string name="update_release_notes">ملاحظات الإصدار</string>
     <string name="update_downloading_format">جارٍ التحميل… %1$d%%</string>
