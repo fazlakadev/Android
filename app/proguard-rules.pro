@@ -52,3 +52,6 @@
 # AndroidX Splash Screen
 -keep class androidx.core.splashscreen.** { *; }
 -dontwarn androidx.core.splashscreen.**
+
+# SLF4J (referenced by Pusher)
+-dontwarn org.slf4j.**
