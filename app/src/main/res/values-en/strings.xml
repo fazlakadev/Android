@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fazlaka</string>
+    <string name="notification_channel_media">Media playback</string>
+    <string name="notification_channel_general">Notifications</string>
+    <string name="notification_channel_messages">Messages</string>
+    <string name="notification_channel_social">Social</string>
+    <string name="notification_channel_content">Content updates</string>
+    <string name="notif_action_view">View</string>
+    <string name="notif_action_open">Open</string>
+    <string name="offline_banner">No internet connection — some data may be outdated</string>
+
+    <!-- Common -->
+    <string name="common_loading">Loading…</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_back">Back</string>
+    <string name="common_search">Search…</string>
+    <string name="common_no_data">No data</string>
+    <string name="common_error">Something went wrong</string>
+    <string name="common_close">Close</string>
+
+    <!-- Bottom navigation tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_seasons">Seasons</string>
+    <string name="tab_search">Search</string>
+    <string name="tab_messages">Messages</string>
+    <string name="tab_profile">Account</string>
+    <string name="tab_more">More</string>
+
+    <!-- More sheet -->
+    <string name="more_title">More from Fazlaka</string>
+    <string name="more_subtitle">Settings, security, privacy and support — in one place</string>
+    <string name="more_settings">Settings</string>
+    <string name="more_settings_sub">Appearance, language and preferences</string>
+    <string name="more_security">Security Center</string>
+    <string name="more_security_sub">Sessions, password and verification</string>
+    <string name="more_activity">Activity Log</string>
+    <string name="more_activity_sub">Every action logged by platform and device</string>
+    <string name="more_privacy">Privacy Policy</string>
+    <string name="more_privacy_sub">How we handle your data</string>
+    <string name="more_terms">Terms of Use</string>
+    <string name="more_terms_sub">Fazlaka usage rules</string>
+    <string name="more_support">Support</string>
+    <string name="more_support_sub">Create a ticket and track it</string>
+    <string name="more_about">Fazlaka — The Arabic content platform · v%1$s</string>
+
+    <!-- Profile -->
+    <string name="sec_account">Account &amp; Security</string>
+    <string name="sec_activity">My Activity</string>
+    <string name="sec_community">Community</string>
+    <string name="sec_about">About</string>
+    <string name="pf_edit_profile">Edit Profile</string>
+    <string name="pf_edit_profile_sub">Name, photo, banner and bio</string>
+    <string name="pf_security">Security Center</string>
+    <string name="pf_security_sub">Password, 2FA and sessions</string>
+    <string name="pf_email">My Email</string>
+    <string name="pf_email_sub">Primary and secondary emails</string>
+    <string name="pf_linked">Linked Accounts</string>
+    <string name="pf_linked_sub">Google · GitHub · Facebook · Phone</string>
+    <string name="pf_activity_log">Activity Log</string>
+    <string name="pf_activity_log_sub">Every action logged by platform and device</string>
+    <string name="pf_history">Watch History</string>
+    <string name="pf_history_sub">What you watched recently</string>
+    <string name="pf_playlists">Playlists</string>
+    <string name="pf_playlists_sub">Your saved lists</string>
+    <string name="pf_likes">Likes</string>
+    <string name="pf_likes_sub">Content you liked</string>
+    <string name="pf_friends">Friends</string>
+    <string name="pf_friends_sub">Your friends and requests</string>
+    <string name="pf_notifications">Notifications</string>
+    <string name="pf_notifications_sub">Latest updates</string>
+    <string name="pf_referral">Invite Code</string>
+    <string name="pf_referral_sub">Invite friends and earn perks</string>
+    <string name="pf_settings">Settings</string>
+    <string name="pf_settings_sub">Appearance, language and preferences</string>
+    <string name="pf_privacy">Privacy Policy</string>
+    <string name="pf_privacy_sub">How we handle your data</string>
+    <string name="pf_support">Support</string>
+    <string name="pf_support_sub">We are here to help</string>
+    <string name="pf_logout">Log out</string>
+    <string name="pf_edit_file">Edit</string>
+    <string name="stat_friends">Friends</string>
+    <string name="stat_ratings">Ratings</string>
+    <string name="stat_playlists">Lists</string>
+    <string name="stat_articles">Articles</string>
+
+    <!-- Chat -->
+    <string name="chat_private">Private chat</string>
+    <string name="chat_members_fmt">%1$d members</string>
+    <string name="chat_input_hint">Write a message…</string>
+    <string name="chat_today">Today</string>
+    <string name="chat_yesterday">Yesterday</string>
+    <string name="chat_attach_photo">📷 Take photo</string>
+    <string name="chat_attach_video">🎬 Record video</string>
+    <string name="chat_attach_gallery_image">🖼️ Photo from gallery</string>
+    <string name="chat_attach_gallery_video">🎞️ Video from gallery</string>
+    <string name="chat_attach_audio">🎵 Audio file</string>
+    <string name="chat_record_hint">Hold to record</string>
+    <string name="chat_to_last">Jump to latest</string>
+    <string name="chat_send">Send</string>
+    <string name="chat_attach">Attach</string>
+    <string name="chat_msg_image">📷 Photo</string>
+    <string name="chat_msg_video">🎬 Video</string>
+    <string name="chat_msg_voice">🎤 Voice message</string>
+
+    <!-- Messages list -->
+    <string name="msgs_title">Messages</string>
+    <string name="msgs_subtitle">Your private chats and groups in one place</string>
+    <string name="msgs_conv_fmt">💬 %1$d conversations</string>
+    <string name="msgs_empty">No conversations yet</string>
+    <string name="msgs_empty_sub">Start a chat with a friend</string>
+
+    <!-- Friends -->
+    <string name="fr_tab_friends">Friends</string>
+    <string name="fr_tab_requests">Requests</string>
+    <string name="fr_tab_suggestions">Suggestions</string>
+    <string name="fr_search_hint">Search friends by name or username…</string>
+    <string name="fr_friends_fmt">👥 %1$d friends</string>
+    <string name="fr_add">Add</string>
+    <string name="fr_accept">Accept</string>
+    <string name="fr_reject">Reject</string>
+    <string name="fr_remove">Remove friend</string>
+    <string name="delete">Delete</string>
+    <string name="double_tap_exit">Press again to exit</string>
+    <string name="fr_block">Block</string>
+    <string name="fr_message">Message</string>
+    <string name="fr_pending">Pending</string>
+    <string name="fr_incoming">Incoming</string>
+    <string name="fr_outgoing">Outgoing</string>
+    <string name="fr_empty">No friends yet</string>
+    <string name="fr_empty_sub">Find and add friends from the Suggestions tab</string>
+    <string name="fr_requests_empty">No incoming requests</string>
+    <string name="fr_outgoing_empty">No outgoing requests</string>
+    <string name="fr_outgoing_empty_sub">Requests you sent and are not accepted yet</string>
+    <string name="fr_sugg_empty">No suggestions</string>
+    <string name="fr_no_results">No matching results</string>
+
+    <!-- Settings -->
+    <string name="st_appearance">Appearance</string>
+    <string name="st_dark_mode">Dark mode</string>
+    <string name="st_language">Language</string>
+    <string name="st_account_security">Account &amp; Security</string>
+    <string name="st_edit_profile">Edit profile</string>
+    <string name="st_security_sessions">Security &amp; sessions</string>
+    <string name="st_support">Support</string>
+    <string name="st_about">About</string>
+    <string name="st_version">Version</string>
+    <string name="st_tagline">Fazlaka — The Arabic content platform</string>
+    <string name="st_hero_title">Settings</string>
+    <string name="st_hero_sub">Customize your experience: appearance, language and security</string>
+    <string name="st_hero_badge">⚙️ Fazlaka</string>
+
+    <!-- Home hero -->
+    <string name="home_hero_sub">Welcome — follow the latest episodes and articles</string>
+    <string name="home_hero_badge">✨ The Arabic content platform</string>
+    <string name="home_for_you">For you</string>
+    <string name="home_latest">Latest episodes</string>
+    <string name="home_all">All</string>
+
+    <!-- Search hero -->
+    <string name="search_hero_title">Search</string>
+    <string name="search_hero_sub">Search episodes, seasons, articles and users</string>
+    <string name="search_hero_badge">🔍 Discover more</string>
+
+    <!-- Seasons hero -->
+    <string name="seasons_hero_title">Seasons</string>
+    <string name="seasons_hero_sub">Explore Fazlaka seasons and your favorite episodes</string>
+    <string name="seasons_fmt">🎬 %1$d seasons</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_subtitle">The Arabic content, episodes and articles platform</string>
+    <string name="onboarding_login">Log in</string>
+    <string name="onboarding_register">Create account</string>
+    <string name="onboarding_phone">Log in with phone number</string>
+    <string name="onboarding_guest">Browse as guest</string>
+
+    <!-- Auth common -->
+    <string name="auth_or_divider">Or continue with</string>
+    <string name="auth_no_account">Don\'t have an account?</string>
+    <string name="auth_has_account">Already have an account?</string>
+    <string name="auth_create_account">Create a new account</string>
+    <string name="auth_login_link">Log in</string>
+
+    <!-- Login -->
+    <string name="login_title">Welcome back</string>
+    <string name="login_subtitle">Log in to continue watching</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_forgot">Forgot password?</string>
+    <string name="login_submit">Log in</string>
+
+    <!-- Register -->
+    <string name="register_title">Create a new account</string>
+    <string name="register_subtitle">Join the Fazlaka community and enjoy the content</string>
+    <string name="register_name">Name</string>
+    <string name="register_username">Username</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password (8 characters min)</string>
+    <string name="register_referral">Invite code (optional)</string>
+    <string name="register_submit">Sign up</string>
+
+    <!-- Forgot password -->
+    <string name="forgot_title">Reset password</string>
+    <string name="forgot_subtitle">Enter your email and we\'ll send you a recovery code</string>
+    <string name="forgot_submit">Send recovery code</string>
+
+    <!-- Reset password -->
+    <string name="reset_title">New password</string>
+    <string name="reset_subtitle_fmt">Enter the code sent to %1$s\nthen choose a new password</string>
+    <string name="reset_new_password">New password (8 characters min)</string>
+    <string name="reset_confirm">Confirm password</string>
+    <string name="reset_mismatch">Passwords don\'t match</string>
+    <string name="reset_submit">Save password</string>
+
+    <!-- Verify email -->
+    <string name="verify_title">Verify your email</string>
+    <string name="verify_subtitle">Enter the 6-digit code we sent to</string>
+    <string name="verify_submit">Confirm email</string>
+    <string name="verify_resent">A new code has been sent to your email</string>
+    <string name="verify_resend">Didn\'t receive the code? Resend</string>
+    <string name="verify_resend_cooldown">You can resend in %1$ds</string>
+    <string name="verify_change_email">Change email</string>
+
+    <!-- 2FA -->
+    <string name="twofa_title">Two-factor authentication</string>
+    <string name="twofa_subtitle">Enter the code sent to your email</string>
+    <string name="twofa_submit">Verify</string>
+
+    <!-- Phone auth -->
+    <string name="phone_title_register">Sign up with phone number</string>
+    <string name="phone_title_login">Log in with phone number</string>
+    <string name="phone_subtitle_register">Create your account using your phone number</string>
+    <string name="phone_subtitle_login">Enter your phone number to receive a verification code</string>
+    <string name="phone_number">Phone number (e.g. +212…)</string>
+    <string name="phone_send_code">Send code</string>
+    <string name="phone_sent_to">Verification code sent to:</string>
+    <string name="phone_verify">Verify</string>
+
+    <!-- Home -->
+    <string name="home_error">Failed to load home page</string>
+
+    <!-- Notifications -->
+    <string name="notif_title">Notifications</string>
+    <string name="notif_subtitle">All new updates in one place</string>
+    <string name="notif_unread_fmt">🔔 %1$d unread</string>
+    <string name="notif_unread_count">Unread (%1$d)</string>
+    <string name="notif_mark_all_read">Mark all as read</string>
+    <string name="notif_empty">No notifications</string>
+    <string name="notif_friend_request">New friend request</string>
+    <string name="notif_support_update">Support update</string>
+    <string name="notif_friend_request_body">You have a new friend request</string>
+    <string name="notif_support_body">Your ticket has been replied to, check support</string>
+    <string name="notif_new">New notification</string>
+
+    <!-- Seasons -->
+    <string name="seasons_empty">No seasons yet</string>
+    <string name="seasons_empty_sub">New seasons will appear here when added</string>
+
+    <!-- Episodes -->
+    <string name="episodes_all_title">Latest episodes</string>
+    <string name="episodes_empty">No episodes yet</string>
+    <string name="episodes_empty_sub">New episodes will appear here when added</string>
+    <string name="episodes_related">Related episodes</string>
+    <string name="episodes_resume_fmt">Resume from %1$s</string>
+    <string name="episodes_no_desc">No description</string>
+
+    <!-- Articles -->
+    <string name="article_title">Article</string>
+    <string name="article_no_content">No content</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Search episodes, seasons, articles…</string>
+    <string name="search_empty">No results</string>
+    <string name="search_results_fmt">Search results for: \"%1$s\"</string>
+    <string name="search_hint_empty">Search for what you want to watch</string>
+    <string name="search_history">Recent searches</string>
+    <string name="search_clear_all">Clear all</string>
+    <string name="search_press_search">Press search for full results</string>
+
+    <!-- Messages -->
+    <string name="msg_group">Group</string>
+    <string name="msg_user">User</string>
+
+    <!-- Conversation -->
+    <string name="conv_title">Conversation</string>
+    <string name="conv_error">Failed to load conversation</string>
+    <string name="conv_close_hint">Tap to close · Pinch to zoom</string>
+
+    <!-- Friends -->
+    <string name="fr_search_hero_sub">Find, add, and connect with friends on Fazlaka</string>
+    <string name="fr_block_title">Block %1$s</string>
+    <string name="fr_block_text">They won\'t be able to send requests or message you. You can unblock later.</string>
+    <string name="fr_cancel">Cancel</string>
+    <string name="fr_search_error">Search failed</string>
+    <string name="fr_user">User</string>
+
+    <!-- Support -->
+    <string name="support_title">Support</string>
+    <string name="support_hero_sub">Our team is here to help — create a ticket and track it</string>
+    <string name="support_badge">🎧 Always here to help</string>
+    <string name="support_new_ticket">Create new ticket</string>
+    <string name="support_subject">Subject</string>
+    <string name="support_description">Problem description</string>
+    <string name="support_sending">Sending…</string>
+    <string name="support_send">Send ticket</string>
+    <string name="support_empty">No tickets</string>
+    <string name="support_empty_sub">Create a new ticket and we\'ll reply soon</string>
+    <string name="support_ticket">Ticket</string>
+    <string name="support_message_hint">Write your message…</string>
+    <string name="support_send_message">Send</string>
+
+    <!-- Profile edit -->
+    <string name="edit_profile_title">Edit profile</string>
+    <string name="edit_profile_name">Name</string>
+    <string name="edit_profile_username">Username</string>
+    <string name="edit_profile_bio">Bio</string>
+    <string name="edit_profile_save">Save</string>
+    <string name="edit_profile_saving">Uploading…</string>
+    <string name="edit_profile_saved">Changes saved</string>
+    <string name="edit_profile_cover">Change cover photo</string>
+
+    <!-- Profile sub -->
+    <string name="pf_history_title">Watch history</string>
+    <string name="pf_history_empty">No watch history</string>
+    <string name="pf_progress_title">Continue watching</string>
+    <string name="pf_progress_empty">No saved progress</string>
+    <string name="pf_playlists_title">Playlists</string>
+    <string name="pf_playlists_empty">No playlists</string>
+    <string name="pf_likes_title">Likes</string>
+    <string name="pf_likes_empty">No likes</string>
+    <string name="pf_referral_title">Invite code</string>
+    <string name="pf_referral_empty">No invitees yet</string>
+    <string name="pf_referral_share">Share your code to invite friends</string>
+    <string name="pf_referral_count_fmt">People who joined via your code: %1$d</string>
+    <string name="pf_complete">Complete</string>
+    <string name="pf_clear_history">Clear history</string>
+
+    <!-- User profile -->
+    <string name="up_stats_friends">Friends</string>
+    <string name="up_stats_ratings">Ratings</string>
+    <string name="up_stats_articles">Articles</string>
+    <string name="up_unblock">Unblock</string>
+    <string name="up_send_message">Send message</string>
+    <string name="up_remove_friend">Remove friend</string>
+    <string name="up_block">Block</string>
+    <string name="up_accept_friend">Accept friend request</string>
+    <string name="up_reject">Reject</string>
+    <string name="up_pending">Friend request pending</string>
+    <string name="up_add_friend">Add friend</string>
+    <string name="up_conv_error">Failed to open conversation, try again</string>
+    <string name="up_user">User</string>
+    <string name="up_close">Tap anywhere to close</string>
+
+    <!-- Settings -->
+    <string name="st_language_arabic">Arabic</string>
+
+    <!-- Item counts -->
+    <string name="item_count_fmt">%1$d items</string>
+    <string name="episode_label">Episode %1$d</string>
+
+    <!-- Item counts with unit -->
+    <string name="count_episodes_fmt">%1$d episodes</string>
+
+    <!-- Update -->
+    <string name="update_title">New update available</string>
+    <string name="update_version_format">Version %1$s → %2$s</string>
+    <string name="update_release_notes">Release notes</string>
+    <string name="update_downloading_format">Downloading… %1$d%%</string>
+    <string name="update_download_install">Download &amp; Install</string>
+    <string name="update_later">Later</string>
+    <string name="update_skip">Skip this version</string>
+    <string name="update_install">Installing…</string>
+    <string name="update_error">Something went wrong during update</string>
+</resources>

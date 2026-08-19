@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Adaptive icon background: deep indigo-to-night gradient with a soft
+     violet glow behind the brain mark. Content outside the 66dp safe zone
+     is decorative only. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="#1E1B4B"
+                android:centerColor="#141433"
+                android:endColor="#0B0F19" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="52dp"
+                android:centerX="0.5"
+                android:centerY="0.46"
+                android:startColor="#337C3AED"
+                android:centerColor="#1A7C3AED"
+                android:endColor="#007C3AED" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Foreground layer of the adaptive launcher icon.
+     IMPORTANT: the bitmap must stretch to the full 108dp layer (gravity=fill).
+     The source PNG already has the brain artwork composed inside the 66dp
+     safe zone. Using gravity=center keeps the intrinsic 1000px size of the
+     nodpi bitmap and crops the artwork (the old "zoomed-in logo" bug). -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap
+            android:src="@drawable/ic_launcher_fg"
+            android:gravity="fill"
+            android:tileMode="disabled" />
+    </item>
+</layer-list>

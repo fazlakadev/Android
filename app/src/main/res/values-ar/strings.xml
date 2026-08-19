@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">فذلكة</string>
+    <string name="notification_channel_media">تشغيل الوسائط</string>
+    <string name="notification_channel_general">الإشعارات</string>
+    <string name="notification_channel_messages">الرسائل</string>
+    <string name="notification_channel_social">التفاعل الاجتماعي</string>
+    <string name="notification_channel_content">تحديثات المحتوى</string>
+    <string name="notif_action_view">عرض</string>
+    <string name="notif_action_open">فتح</string>
+    <string name="offline_banner">لا يوجد اتصال بالإنترنت — بعض البيانات قد لا تكون محدثة</string>
+
+    <!-- Common -->
+    <string name="common_loading">جارٍ التحميل…</string>
+    <string name="common_retry">إعادة المحاولة</string>
+    <string name="common_back">رجوع</string>
+    <string name="common_search">ابحث…</string>
+    <string name="common_no_data">لا توجد بيانات</string>
+    <string name="common_error">حدث خطأ ما</string>
+    <string name="common_close">إغلاق</string>
+
+    <!-- Bottom navigation tabs -->
+    <string name="tab_home">الرئيسية</string>
+    <string name="tab_seasons">المواسم</string>
+    <string name="tab_search">البحث</string>
+    <string name="tab_messages">الرسائل</string>
+    <string name="tab_profile">حسابي</string>
+    <string name="tab_more">المزيد</string>
+
+    <!-- More sheet -->
+    <string name="more_title">المزيد من فذلكة</string>
+    <string name="more_subtitle">إعدادات، أمان، خصوصية، ودعم — في مكان واحد</string>
+    <string name="more_settings">الإعدادات</string>
+    <string name="more_settings_sub">المظهر واللغة والتفضيلات</string>
+    <string name="more_security">مركز الأمان</string>
+    <string name="more_security_sub">الجلسات وكلمة المرور والتحقق</string>
+    <string name="more_activity">سجل النشاط</string>
+    <string name="more_activity_sub">كل العمليات موثقة بالمنصة والجهاز</string>
+    <string name="more_privacy">سياسة الخصوصية</string>
+    <string name="more_privacy_sub">كيف نتعامل مع بياناتك</string>
+    <string name="more_terms">شروط الاستخدام</string>
+    <string name="more_terms_sub">قواعد استخدام فذلكة</string>
+    <string name="more_support">الدعم الفني</string>
+    <string name="more_support_sub">أنشئ تذكرة وتابع حالتها</string>
+    <string name="more_about">فذلكة — منصة المحتوى العربية · v%1$s</string>
+
+    <!-- Profile -->
+    <string name="sec_account">الحساب والأمان</string>
+    <string name="sec_activity">نشاطي</string>
+    <string name="sec_community">المجتمع</string>
+    <string name="sec_about">عن التطبيق</string>
+    <string name="pf_edit_profile">تعديل الملف الشخصي</string>
+    <string name="pf_edit_profile_sub">الاسم، الصورة، الغلاف، والنبذة</string>
+    <string name="pf_security">مركز الأمان</string>
+    <string name="pf_security_sub">كلمة المرور، التحقق بخطوتين، الجلسات</string>
+    <string name="pf_email">بريدي الإلكتروني</string>
+    <string name="pf_email_sub">البريد الأساسي والبريدات الثانوية</string>
+    <string name="pf_linked">الحسابات المرتبطة</string>
+    <string name="pf_linked_sub">Google · GitHub · Facebook · الهاتف</string>
+    <string name="pf_activity_log">سجل النشاط</string>
+    <string name="pf_activity_log_sub">كل عملية موثقة بالمنصة والجهاز</string>
+    <string name="pf_history">سجل المشاهدة</string>
+    <string name="pf_history_sub">ما شاهدته مؤخراً</string>
+    <string name="pf_playlists">قوائم التشغيل</string>
+    <string name="pf_playlists_sub">قوائمك المحفوظة</string>
+    <string name="pf_likes">الإعجابات</string>
+    <string name="pf_likes_sub">المحتوى الذي أعجبك</string>
+    <string name="pf_friends">الأصدقاء</string>
+    <string name="pf_friends_sub">أصدقاؤك وطلبات الصداقة</string>
+    <string name="pf_notifications">الإشعارات</string>
+    <string name="pf_notifications_sub">آخر التحديثات</string>
+    <string name="pf_referral">كود الدعوة</string>
+    <string name="pf_referral_sub">ادعُ أصدقاءك واكسب مزايا</string>
+    <string name="pf_settings">الإعدادات</string>
+    <string name="pf_settings_sub">المظهر واللغة والتفضيلات</string>
+    <string name="pf_privacy">سياسة الخصوصية</string>
+    <string name="pf_privacy_sub">كيف نتعامل مع بياناتك</string>
+    <string name="pf_support">الدعم الفني</string>
+    <string name="pf_support_sub">نحن هنا لمساعدتك</string>
+    <string name="pf_logout">تسجيل الخروج</string>
+    <string name="pf_edit_file">تعديل الملف</string>
+    <string name="stat_friends">أصدقاء</string>
+    <string name="stat_ratings">تقييمات</string>
+    <string name="stat_playlists">قوائم</string>
+    <string name="stat_articles">مقالات</string>
+
+    <!-- Chat -->
+    <string name="chat_private">محادثة خاصة</string>
+    <string name="chat_members_fmt">%1$d أعضاء</string>
+    <string name="chat_input_hint">اكتب رسالتك…</string>
+    <string name="chat_today">اليوم</string>
+    <string name="chat_yesterday">أمس</string>
+    <string name="chat_attach_photo">📷 التقاط صورة</string>
+    <string name="chat_attach_video">🎬 تصوير فيديو</string>
+    <string name="chat_attach_gallery_image">🖼️ صورة من المعرض</string>
+    <string name="chat_attach_gallery_video">🎞️ فيديو من المعرض</string>
+    <string name="chat_attach_audio">🎵 ملف صوتي</string>
+    <string name="chat_record_hint">اضغط للتسجيل</string>
+    <string name="chat_to_last">إلى آخر رسالة</string>
+    <string name="chat_send">إرسال</string>
+    <string name="chat_attach">إرفاق</string>
+    <string name="chat_msg_image">📷 صورة</string>
+    <string name="chat_msg_video">🎬 فيديو</string>
+    <string name="chat_msg_voice">🎤 رسالة صوتية</string>
+
+    <!-- Messages list -->
+    <string name="msgs_title">الرسائل</string>
+    <string name="msgs_subtitle">محادثاتك الخاصة والمجموعات في مكان واحد</string>
+    <string name="msgs_conv_fmt">💬 %1$d محادثة</string>
+    <string name="msgs_empty">لا توجد محادثات بعد</string>
+    <string name="msgs_empty_sub">ابدأ محادثة مع صديق جديد</string>
+
+    <!-- Friends -->
+    <string name="fr_tab_friends">الأصدقاء</string>
+    <string name="fr_tab_requests">الطلبات</string>
+    <string name="fr_tab_suggestions">اقتراحات</string>
+    <string name="fr_search_hint">ابحث عن أصدقاء بالاسم أو المعرّف…</string>
+    <string name="fr_friends_fmt">👥 %1$d صديق</string>
+    <string name="fr_add">إضافة</string>
+    <string name="fr_accept">قبول</string>
+    <string name="fr_reject">رفض</string>
+    <string name="fr_remove">حذف من الأصدقاء</string>
+    <string name="fr_block">حظر</string>
+    <string name="fr_message">مراسلة</string>
+    <string name="fr_pending">بانتظار الرد</string>
+    <string name="fr_incoming">الواردة</string>
+    <string name="fr_outgoing">الصادرة</string>
+    <string name="fr_empty">لا يوجد أصدقاء</string>
+    <string name="fr_empty_sub">ابحث وأضف أصدقاء جدداً من تبويب الاقتراحات</string>
+    <string name="fr_requests_empty">لا توجد طلبات واردة</string>
+    <string name="fr_outgoing_empty">لا توجد طلبات صادرة</string>
+    <string name="fr_outgoing_empty_sub">الطلبات التي أرسلتها ولم تُقبل بعد ستظهر هنا</string>
+    <string name="fr_sugg_empty">لا توجد اقتراحات</string>
+    <string name="fr_no_results">لا توجد نتائج مطابقة</string>
+
+    <!-- Settings -->
+    <string name="st_appearance">المظهر</string>
+    <string name="st_dark_mode">الوضع الداكن</string>
+    <string name="st_language">اللغة</string>
+    <string name="st_account_security">الحساب والأمان</string>
+    <string name="st_edit_profile">تعديل الملف الشخصي</string>
+    <string name="st_security_sessions">الأمان والجلسات</string>
+    <string name="st_support">الدعم الفني</string>
+    <string name="st_about">حول التطبيق</string>
+    <string name="st_version">الإصدار</string>
+    <string name="st_tagline">فذلكة — منصة المحتوى العربية</string>
+    <string name="st_hero_title">الإعدادات</string>
+    <string name="st_hero_sub">خصّص تجربتك: المظهر، اللغة، والأمان</string>
+    <string name="st_hero_badge">⚙️ فذلكة</string>
+
+    <!-- Home hero -->
+    <string name="home_hero_sub">أهلاً بك — تابع أحدث الحلقات والمقالات</string>
+    <string name="home_hero_badge">✨ منصة المحتوى العربية</string>
+    <string name="home_for_you">مقترحات لك</string>
+    <string name="home_latest">أحدث الحلقات</string>
+    <string name="home_all">الكل</string>
+
+    <!-- Search hero -->
+    <string name="search_hero_title">البحث</string>
+    <string name="search_hero_sub">ابحث في الحلقات والمواسم والمقالات والمستخدمين</string>
+    <string name="search_hero_badge">🔍 اكتشف المزيد</string>
+
+    <!-- Seasons hero -->
+    <string name="seasons_hero_title">المواسم</string>
+    <string name="seasons_hero_sub">استكشف مواسم فذلكة وتابع حلقاتك المفضلة</string>
+    <string name="seasons_fmt">🎬 %1$d موسم</string>
+
+    <!-- Accessibility -->
+    <string name="accessibility_play_episode">تشغيل الحلقة</string>
+    <string name="accessibility_pause_episode">إيقاف الحلقة مؤقتاً</string>
+    <string name="accessibility_share">مشاركة</string>
+    <string name="accessibility_back">رجوع</string>
+    <string name="accessibility_search">بحث</string>
+    <string name="accessibility_close">إغلاق</string>
+    <string name="accessibility_toggle_dark_mode">تبديل الوضع الداكن</string>
+    <string name="accessibility_select_language">اختيار اللغة</string>
+    <string name="accessibility_mini_player_title">مشغل مصغر</string>
+    <string name="accessibility_mini_player_close">إغلاق المشغل المصغّر</string>
+    <string name="accessibility_skip_next">التالي</string>
+    <string name="accessibility_skip_previous">السابق</string>
+    <string name="accessibility_like">إعجاب</string>
+    <string name="accessibility_remove_like">إزالة الإعجاب</string>
+    <string name="accessibility_clear_search">مسح البحث</string>
+    <string name="accessibility_search_history_item">عنصر في سجل البحث</string>
+    <string name="accessibility_remove_search_item">حذف من سجل البحث</string>
+    <string name="accessibility_offline">غير متصل</string>
+    <string name="accessibility_episode_row_fmt"> الحلقة %1$s. اضغط لفتح التفاصيل</string>
+    <string name="accessibility_banner_fmt">شعار %1$s</string>
+    <string name="accessibility_resume_episode">استئناف من %1$s</string>
+    <string name="accessibility_filter_chip_fmt">تصفية %1$s</string>
+    <string name="accessibility_navigation_bar">شريط التنقل السفلي</string>
+
+    <!-- Update -->
+    <string name="update_title">تحديث جديد متاح</string>
+    <string name="update_version_format">الإصدار %1$s → %2$s</string>
+    <string name="update_release_notes">ملاحظات الإصدار</string>
+    <string name="update_downloading_format">جارٍ التحميل… %1$d%%</string>
+    <string name="update_download_install">تحميل وتثبيت</string>
+    <string name="update_later">لاحقاً</string>
+    <string name="update_skip">تخطي هذا الإصدار</string>
+    <string name="update_install">جارٍ التثبيت…</string>
+    <string name="update_error">حدث خطأ أثناء التحديث</string>
+</resources>
