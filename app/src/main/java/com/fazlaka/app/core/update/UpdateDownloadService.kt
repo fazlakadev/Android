@@ -290,6 +290,9 @@ class UpdateDownloadService : Service() {
         }
     }
 
+    private val updatesDir: File
+        get() = File(cacheDir, "updates").also { it.mkdirs() }
+
     companion object {
         const val CHANNEL_UPDATE = "update_download"
         const val NOTIFICATION_ID = 9999
@@ -312,13 +315,6 @@ class UpdateDownloadService : Service() {
         fun stop(context: Context) {
             context.stopService(Intent(context, UpdateDownloadService::class.java))
         }
-
-        private val updatesDir: File
-            get() = File(
-                android.os.Environment.getDownloadCacheDirectory().parentFile
-                    ?: File("/data/data/com.fazlaka.app/cache"),
-                "fazlaka/updates",
-            ).also { it.mkdirs() }
 
         fun getUpdateFile(context: Context): File {
             val dir = File(context.cacheDir, "updates").also { it.mkdirs() }
