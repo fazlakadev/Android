@@ -16,8 +16,8 @@ android {
         applicationId = "com.fazlaka.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 19
-        versionName = "1.9.0"
+        versionCode = 21
+        versionName = "1.9.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }

@@ -45,6 +45,7 @@ import androidx.compose.material.icons.filled.PhonelinkErase
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Verified
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -64,6 +65,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -81,6 +84,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import android.webkit.WebSettings
 import com.fazlaka.app.BuildConfig
 import com.fazlaka.app.core.model.dto.AuthEventDto
 import com.fazlaka.app.core.network.ApiResult
@@ -1005,16 +1009,87 @@ private fun OAuthLinkWebView(
         )
     }
 
-    AlertDialog(
-        onDismissRequest = { onClose(false) },
-        title = { Text("ربط الحساب") },
-        text = {
-            Box(Modifier.fillMaxWidth().height(420.dp)) {
+    val webViewClient = remember {
+        object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                request: WebResourceRequest,
+            ): Boolean = intercept(view, request.url.toString())
+
+            @Deprecated("Deprecated in API 24")
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                url: String,
+            ): Boolean = intercept(view, url)
+
+            private fun intercept(view: WebView, url: String): Boolean = when {
+                url.contains("link=success") -> {
+                    view.post { onClose(true) }
+                    true
+                }
+                url.contains("link=failed") -> {
+                    view.post { onClose(false) }
+                    true
+                }
+                url.contains("accessToken=") -> {
+                    view.post { onClose(false) }
+                    true
+                }
+                url.startsWith("$origin/api/") -> {
+                    view.loadUrl(url, apiHeaders)
+                    true
+                }
+                url.startsWith("http://localhost:3001") ||
+                    url.startsWith("http://127.0.0.1:3001") -> {
+                    view.loadUrl(
+                        url
+                            .replace("http://localhost:3001", origin)
+                            .replace("http://127.0.0.1:3001", origin),
+                        apiHeaders,
+                    )
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    Dialog(onDismissRequest = { onClose(false) }) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+            color = MaterialTheme.colorScheme.background,
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 16.dp),
+            ) {
+                // Header
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text("ربط الحساب", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    IconButton(onClick = { onClose(false) }) {
+                        Icon(Icons.Filled.Close, contentDescription = "إغلاق", tint = MaterialTheme.colorScheme.onSurface)
+                    }
+                }
+                androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
+
+                // WebView
                 AndroidView(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                     factory = { ctx ->
                         WebView(ctx).apply {
                             settings.javaScriptEnabled = true
                             settings.domStorageEnabled = true
+                            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                             CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
                             cookie?.let { token ->
                                 CookieManager.getInstance().setCookie(
@@ -1023,60 +1098,17 @@ private fun OAuthLinkWebView(
                                 )
                                 CookieManager.getInstance().flush()
                             }
-                            webViewClient = object : WebViewClient() {
-                                override fun shouldOverrideUrlLoading(
-                                    view: WebView,
-                                    request: WebResourceRequest,
-                                ): Boolean = intercept(view, request.url.toString())
-
-                                @Deprecated("Deprecated in API 24")
-                                override fun shouldOverrideUrlLoading(
-                                    view: WebView,
-                                    url: String,
-                                ): Boolean = intercept(view, url)
-
-                                private fun intercept(view: WebView, url: String): Boolean = when {
-                                    url.contains("link=success") -> {
-                                        post { onClose(true) }
-                                        true
-                                    }
-                                    url.contains("link=failed") -> {
-                                        post { onClose(false) }
-                                        true
-                                    }
-                                    url.contains("accessToken=") -> {
-                                        // Should not happen during linking; treat as abort.
-                                        post { onClose(false) }
-                                        true
-                                    }
-                                    url.startsWith("$origin/api/") -> {
-                                        view.loadUrl(url, apiHeaders)
-                                        true
-                                    }
-                                    url.startsWith("http://localhost:3001") ||
-                                        url.startsWith("http://127.0.0.1:3001") -> {
-                                        view.loadUrl(
-                                            url
-                                                .replace("http://localhost:3001", origin)
-                                                .replace("http://127.0.0.1:3001", origin),
-                                            apiHeaders,
-                                        )
-                                        true
-                                    }
-                                    else -> false
-                                }
-                            }
+                            setWebViewClient(webViewClient)
                             loadUrl(url, apiHeaders)
                         }
                     },
-                    modifier = Modifier.fillMaxSize(),
+                    update = { webView ->
+                        // Handle configuration changes
+                    },
                 )
             }
-        },
-        confirmButton = {
-            TextButton(onClick = { onClose(false) }) { Text("إغلاق") }
-        },
-    )
+        }
+    }
 }
 
 // ===========================================================================

@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.fazlaka.app.MainActivity
 import com.fazlaka.app.R
@@ -78,8 +79,10 @@ class UpdateDownloadService : Service() {
                     updateState(DownloadState.Error("Download failed"))
                     updateNotificationError()
                 }
-            } catch (e: Exception) {
-                updateState(DownloadState.Error(e.message ?: "Download failed"))
+} catch (e: Exception) {
+                val errorMsg = "فشل التحميل: ${e.message ?: "خطأ غير معروف"}"
+                Log.e("UpdateDownloadService", errorMsg, e)
+                updateState(DownloadState.Error(errorMsg))
                 updateNotificationError()
             } finally {
                 releaseWakeLock()
@@ -99,6 +102,7 @@ class UpdateDownloadService : Service() {
     }
 
     private suspend fun downloadApk(url: String): File? = withContext(Dispatchers.IO) {
+        Log.d("UpdateDownloadService", "Starting download from: $url")
         try {
             cleanupOldApks()
             val request = Request.Builder().url(url).build()
@@ -111,7 +115,11 @@ class UpdateDownloadService : Service() {
                 .newCall(request)
                 .execute()
 
-            if (!response.isSuccessful) return@withContext null
+            if (!response.isSuccessful) {
+                val errorMsg = "Server error: ${response.code} ${response.message}"
+                Log.e("UpdateDownloadService", "Download failed: $errorMsg")
+                return@withContext null
+            }
             val body = response.body ?: return@withContext null
             val contentLength = body.contentLength()
             val outputFile = File(updatesDir, "fazlaka_update.apk")
