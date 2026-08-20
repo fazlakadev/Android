@@ -152,20 +152,7 @@ fun ProfileScreen(
             MenuGroup(
                 items = listOf(
                     MenuItem(Icons.Default.Group, stringResource(R.string.pf_friends), stringResource(R.string.pf_friends_sub)) { onNavigate(Routes.FRIENDS) },
-                    MenuItem(Icons.Default.Notifications, stringResource(R.string.pf_notifications), stringResource(R.string.pf_notifications_sub)) { onNavigate(Routes.NOTIFICATIONS) },
                     MenuItem(Icons.Default.PersonAdd, stringResource(R.string.pf_referral), stringResource(R.string.pf_referral_sub)) { onNavigate(Routes.REFERRALS) },
-                ),
-            )
-        }
-
-        item {
-            Spacer(Modifier.height(14.dp))
-            SectionLabel(stringResource(R.string.sec_about))
-            MenuGroup(
-                items = listOf(
-                    MenuItem(Icons.Default.Settings, stringResource(R.string.pf_settings), stringResource(R.string.pf_settings_sub)) { onNavigate(Routes.SETTINGS) },
-                    MenuItem(Icons.Default.PrivacyTip, stringResource(R.string.pf_privacy), stringResource(R.string.pf_privacy_sub)) { onNavigate(Routes.PRIVACY_POLICY) },
-                    MenuItem(Icons.Default.SupportAgent, stringResource(R.string.pf_support), stringResource(R.string.pf_support_sub)) { onNavigate(Routes.SUPPORT) },
                 ),
             )
         }
@@ -323,15 +310,6 @@ private fun ProfileHeader(
                     ),
             )
         }
-        // More menu shortcut — settings, security, privacy, support…
-        com.fazlaka.app.ui.components.MoreMenuButton(
-            onNavigate = onMore,
-            onDarkSurface = true,
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .statusBarsPadding()
-                .padding(10.dp),
-        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()

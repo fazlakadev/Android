@@ -19,9 +19,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.SupportAgent
+import androidx.compose.material.icons.filled.WhereToVote
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -56,13 +58,13 @@ fun SettingsScreen(
     onBack: () -> Unit,
     onNavigate: (String) -> Unit,
     viewModel: MainViewModel = hiltViewModel(),
+    showBackButton: Boolean = true,
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val activity = LocalContext.current as? Activity
 
     fun pickLocale(code: String) {
         viewModel.setLocale(code) {
-            // Recreate applies the new locale instantly (attachBaseContext).
             activity?.recreate()
         }
     }
@@ -74,19 +76,21 @@ fun SettingsScreen(
             .statusBarsPadding()
             .verticalScroll(rememberScrollState()),
     ) {
-        // Header with back button
+        // Header
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            IconButton(onClick = onBack) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.common_back),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+            if (showBackButton) {
+                IconButton(onClick = onBack) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.common_back),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
             }
             Text(
                 text = stringResource(R.string.st_hero_title),
@@ -126,6 +130,19 @@ fun SettingsScreen(
             LanguageOption(stringResource(com.fazlaka.app.R.string.st_language_arabic), "ar", state.locale) { pickLocale("ar") }
             LanguageOption("Français", "fr", state.locale) { pickLocale("fr") }
             LanguageOption("English", "en", state.locale) { pickLocale("en") }
+        }
+
+        SettingsSection(title = stringResource(R.string.st_notifications)) {
+            SettingsItem(
+                icon = Icons.Default.Notifications,
+                label = stringResource(R.string.pf_notifications),
+                onClick = { onNavigate(Routes.NOTIFICATIONS) },
+            )
+            SettingsItem(
+                icon = Icons.Default.WhereToVote,
+                label = stringResource(R.string.st_login_alerts),
+                onClick = { onNavigate(Routes.ACTIVITY_LOG) },
+            )
         }
 
         SettingsSection(title = stringResource(R.string.st_account_security)) {

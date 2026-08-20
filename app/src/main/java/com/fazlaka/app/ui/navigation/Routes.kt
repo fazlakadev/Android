@@ -13,10 +13,9 @@ object Routes {
     const val OAUTH = "oauth/{provider}"
 
     const val HOME = "home"
-    const val SEASONS = "seasons"
     const val SEARCH = "search"
-    const val MESSAGES = "messages"
     const val PROFILE = "profile"
+    const val SETTINGS_TAB = "settings_tab"
     const val MAIN = "main"
 
     const val SEASON = "season/{idOrSlug}"
@@ -46,6 +45,8 @@ object Routes {
     const val MY_PLAYLISTS = "my_playlists"
     const val REFERRALS = "referrals"
     const val LIKES_HISTORY = "likes_history"
+    const val SEASONS = "seasons"
+    const val MESSAGES = "messages"
 
     fun season(idOrSlug: String) = "season/$idOrSlug"
     fun episode(idOrSlug: String) = "episode/$idOrSlug"
@@ -63,17 +64,13 @@ sealed class MainTab(
     val route: String,
 ) {
     data object Home : MainTab(Routes.HOME)
-    data object Seasons : MainTab(Routes.SEASONS)
-    data object Search : MainTab(Routes.SEARCH)
-    data object Messages : MainTab(Routes.MESSAGES)
     data object Profile : MainTab(Routes.PROFILE)
+    data object Settings : MainTab(Routes.SETTINGS_TAB)
 
     companion object {
         fun fromRoute(route: String?): MainTab = when (route) {
-            Routes.SEASONS -> Seasons
-            Routes.SEARCH -> Search
-            Routes.MESSAGES -> Messages
             Routes.PROFILE -> Profile
+            Routes.SETTINGS_TAB -> Settings
             else -> Home
         }
     }

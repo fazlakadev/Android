@@ -11,28 +11,29 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Send
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -42,6 +43,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -67,18 +69,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fazlaka.app.core.event.EventBus
+import com.fazlaka.app.ui.components.Avatar
 import com.fazlaka.app.ui.components.MiniPlayer
 import com.fazlaka.app.ui.screens.home.HomeScreen
-import com.fazlaka.app.ui.screens.messages.MessagesScreen
 import com.fazlaka.app.ui.screens.profile.ProfileScreen
-import com.fazlaka.app.ui.screens.search.SearchScreen
-import com.fazlaka.app.ui.screens.seasons.SeasonsScreen
+import com.fazlaka.app.ui.screens.settings.SettingsScreen
 import com.fazlaka.app.ui.theme.FazlakaCyan
 import com.fazlaka.app.ui.theme.FazlakaGradientMid
 import com.fazlaka.app.ui.theme.FazlakaGradientStart
 import com.fazlaka.app.ui.viewmodel.PlayerViewModel
+import com.fazlaka.app.ui.viewmodel.ProfileViewModel
 import kotlinx.coroutines.launch
 
 private data class TabItem(
@@ -90,13 +93,11 @@ private data class TabItem(
 
 private val tabs = listOf(
     TabItem(MainTab.Home, com.fazlaka.app.R.string.tab_home, Icons.Filled.Home, Icons.Outlined.Home),
-    TabItem(MainTab.Seasons, com.fazlaka.app.R.string.tab_seasons, Icons.Filled.List, Icons.Outlined.List),
-    TabItem(MainTab.Search, com.fazlaka.app.R.string.tab_search, Icons.Filled.Search, Icons.Outlined.Search),
-    TabItem(MainTab.Messages, com.fazlaka.app.R.string.tab_messages, Icons.Filled.Send, Icons.Outlined.Send),
     TabItem(MainTab.Profile, com.fazlaka.app.R.string.tab_profile, Icons.Filled.Person, Icons.Outlined.Person),
+    TabItem(MainTab.Settings, com.fazlaka.app.R.string.tab_settings, Icons.Filled.Settings, Icons.Outlined.Settings),
 )
 
-private val tabOrder = listOf(Routes.HOME, Routes.SEASONS, Routes.SEARCH, Routes.MESSAGES, Routes.PROFILE)
+private val tabOrder = listOf(Routes.HOME, Routes.PROFILE, Routes.SETTINGS_TAB)
 
 private fun tabDirection(prevRoute: String?, nextRoute: String?): Int =
     tabOrder.indexOf(nextRoute) - tabOrder.indexOf(prevRoute)
@@ -116,11 +117,19 @@ fun MainScreen(
         androidx.hilt.navigation.compose.hiltViewModel()
     val playerViewModel: PlayerViewModel =
         androidx.hilt.navigation.compose.hiltViewModel()
+    val profileViewModel: ProfileViewModel =
+        androidx.hilt.navigation.compose.hiltViewModel()
     val badges by badgesViewModel.state.collectAsStateWithLifecycle()
     val miniPlayerState by playerViewModel.miniPlayerState.collectAsStateWithLifecycle()
     val currentEpisodeSlug by playerViewModel.episodeSlug.collectAsStateWithLifecycle()
-    var showMore by remember { mutableStateOf(false) }
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    // Get user avatar for profile tab
+    val user by profileViewModel.userFlow.collectAsStateWithLifecycle(initialValue = null)
+    val avatarUrl = user?.avatarUrl
+    val userName = user?.name
 
     // Double-tap back to exit
     var lastBackPress by remember { mutableLongStateOf(0L) }
@@ -143,6 +152,11 @@ fun MainScreen(
         }
     }
 
+    // Close drawer on back press
+    BackHandler(enabled = drawerState.isOpen) {
+        scope.launch { drawerState.close() }
+    }
+
     LaunchedEffect(Unit) {
         EventBus.events.collect { event ->
             snackbarHostState.currentSnackbarData?.dismiss()
@@ -153,99 +167,108 @@ fun MainScreen(
         }
     }
 
-    Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-        bottomBar = {
-            BottomNavBar(
-                currentTab = currentTab,
-                navController = navController,
-                unreadMessages = badges.unreadMessages,
-                onOpenMore = { showMore = true },
-            )
-        },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
-        topBar = {
-            com.fazlaka.app.ui.components.OfflineBanner(
-                networkMonitor = connectivityViewModel.networkMonitor,
-            )
-        },
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier.padding(innerPadding),
-        ) {
-            NavHost(
-                navController = navController,
-                startDestination = Routes.HOME,
-                modifier = Modifier.weight(1f),
-                enterTransition = {
-                    val forward = tabDirection(initialState.destination.route, targetState.destination.route) > 0
-                    fadeIn(tween(300, easing = FastOutSlowInEasing)) +
-                        if (forward) {
-                            slideInHorizontally(tween(320, easing = FastOutSlowInEasing)) { it / 3 }
-                        } else {
-                            slideInHorizontally(tween(320, easing = FastOutSlowInEasing)) { -it / 3 }
-                        } +
-                        scaleIn(
-                            animationSpec = tween(320, easing = FastOutSlowInEasing),
-                            initialScale = 0.99f,
-                        )
-                },
-                exitTransition = {
-                    val forward = tabDirection(initialState.destination.route, targetState.destination.route) > 0
-                    fadeOut(tween(200)) +
-                        if (forward) {
-                            slideOutHorizontally(tween(220)) { -it / 5 }
-                        } else {
-                            slideOutHorizontally(tween(220)) { it / 5 }
-                        }
-                },
-                popEnterTransition = {
-                    fadeIn(tween(260)) +
-                        scaleIn(animationSpec = tween(260), initialScale = 0.99f)
-                },
-                popExitTransition = {
-                    fadeOut(tween(200))
-                },
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        gesturesEnabled = drawerState.isOpen,
+        drawerContent = {
+            ModalDrawerSheet(
+                drawerContainerColor = MaterialTheme.colorScheme.background,
+                drawerShape = RoundedCornerShape(topEnd = 0.dp, bottomEnd = 0.dp),
             ) {
-                composable(Routes.HOME) {
-                    HomeScreen(onNavigate = onNavigate)
-                }
-                composable(Routes.SEASONS) {
-                    SeasonsScreen(onNavigate = onNavigate)
-                }
-                composable(Routes.SEARCH) {
-                    SearchScreen(onNavigate = onNavigate)
-                }
-                composable(Routes.MESSAGES) {
-                    MessagesScreen(onNavigate = onNavigate)
-                }
-                composable(Routes.PROFILE) {
-                    ProfileScreen(onNavigate = onNavigate, onLoggedOut = onLoggedOut)
-                }
+                AppDrawer(
+                    onNavigate = { route ->
+                        scope.launch { drawerState.close() }
+                        onNavigate(route)
+                    },
+                )
             }
-
-            MiniPlayer(
-                state = miniPlayerState,
-                onPlayPause = { playerViewModel.togglePlayPause() },
-                onNext = { playerViewModel.skipToNext() },
-                onPrevious = { playerViewModel.skipToPrevious() },
-                onClick = {
-                    currentEpisodeSlug?.let { slug ->
-                        onNavigate(Routes.episode(slug))
-                    }
-                },
-            )
-        }
-    }
-
-    if (showMore) {
-        com.fazlaka.app.ui.components.MoreMenuSheet(
-            onDismiss = { showMore = false },
-            onNavigate = { route ->
-                showMore = false
-                onNavigate(route)
+        },
+    ) {
+        Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            bottomBar = {
+                BottomNavBar(
+                    currentTab = currentTab,
+                    navController = navController,
+                    avatarUrl = avatarUrl,
+                    userName = userName,
+                )
             },
-        )
+            contentWindowInsets = WindowInsets(0, 0, 0, 0),
+            topBar = {
+                AppTopBar(
+                    onOpenDrawer = { scope.launch { drawerState.open() } },
+                    onSearch = { onNavigate(Routes.SEARCH) },
+                    onFriends = { onNavigate(Routes.FRIENDS) },
+                    friendRequestCount = badges.unreadMessages,
+                )
+            },
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier.padding(innerPadding),
+            ) {
+                NavHost(
+                    navController = navController,
+                    startDestination = Routes.HOME,
+                    modifier = Modifier.weight(1f),
+                    enterTransition = {
+                        val forward = tabDirection(initialState.destination.route, targetState.destination.route) > 0
+                        fadeIn(tween(300, easing = FastOutSlowInEasing)) +
+                            if (forward) {
+                                slideInHorizontally(tween(320, easing = FastOutSlowInEasing)) { it / 3 }
+                            } else {
+                                slideInHorizontally(tween(320, easing = FastOutSlowInEasing)) { -it / 3 }
+                            } +
+                            scaleIn(
+                                animationSpec = tween(320, easing = FastOutSlowInEasing),
+                                initialScale = 0.99f,
+                            )
+                    },
+                    exitTransition = {
+                        val forward = tabDirection(initialState.destination.route, targetState.destination.route) > 0
+                        fadeOut(tween(200)) +
+                            if (forward) {
+                                slideOutHorizontally(tween(220)) { -it / 5 }
+                            } else {
+                                slideOutHorizontally(tween(220)) { it / 5 }
+                            }
+                    },
+                    popEnterTransition = {
+                        fadeIn(tween(260)) +
+                            scaleIn(animationSpec = tween(260), initialScale = 0.99f)
+                    },
+                    popExitTransition = {
+                        fadeOut(tween(200))
+                    },
+                ) {
+                    composable(Routes.HOME) {
+                        HomeScreen(onNavigate = onNavigate)
+                    }
+                    composable(Routes.PROFILE) {
+                        ProfileScreen(onNavigate = onNavigate, onLoggedOut = onLoggedOut)
+                    }
+                    composable(Routes.SETTINGS_TAB) {
+                        SettingsScreen(
+                            onBack = {},
+                            onNavigate = onNavigate,
+                            showBackButton = false,
+                        )
+                    }
+                }
+
+                MiniPlayer(
+                    state = miniPlayerState,
+                    onPlayPause = { playerViewModel.togglePlayPause() },
+                    onNext = { playerViewModel.skipToNext() },
+                    onPrevious = { playerViewModel.skipToPrevious() },
+                    onClick = {
+                        currentEpisodeSlug?.let { slug ->
+                            onNavigate(Routes.episode(slug))
+                        }
+                    },
+                )
+            }
+        }
     }
 }
 
@@ -253,11 +276,10 @@ fun MainScreen(
 private fun BottomNavBar(
     currentTab: MainTab,
     navController: NavHostController,
-    unreadMessages: Int = 0,
-    onOpenMore: () -> Unit = {},
+    avatarUrl: String? = null,
+    userName: String? = null,
 ) {
     val surfaceColor = MaterialTheme.colorScheme.surface
-    val moreLabel = androidx.compose.ui.res.stringResource(com.fazlaka.app.R.string.tab_more)
     val outlineColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.22f)
 
     Box(
@@ -297,11 +319,6 @@ private fun BottomNavBar(
                         animationSpec = tween(220),
                         label = "labelAlpha",
                     )
-                    val indicatorGlow by animateFloatAsState(
-                        targetValue = if (selected) 1f else 0f,
-                        animationSpec = tween(300, easing = FastOutSlowInEasing),
-                        label = "indicatorGlow",
-                    )
                     val density = LocalDensity.current
                     val liftPx = with(density) { offsetY.dp.toPx() }
 
@@ -317,54 +334,91 @@ private fun BottomNavBar(
                             }
                         },
                         icon = {
-                            Box(
-                                modifier = Modifier
-                                    .size(46.dp)
-                                    .clip(RoundedCornerShape(15.dp))
-                                    .background(
+                            if (item.tab == MainTab.Profile) {
+                                // Custom avatar icon for profile tab
+                                val avatarBg = if (selected) {
+                                    Modifier.background(
                                         Brush.verticalGradient(
-                                            colors = if (selected) {
-                                                listOf(
-                                                    FazlakaGradientStart.copy(alpha = 0.95f),
-                                                    FazlakaGradientMid.copy(alpha = 0.95f),
-                                                )
-                                            } else {
-                                                listOf(Color.Transparent, Color.Transparent)
-                                            },
+                                            listOf(
+                                                FazlakaGradientStart.copy(alpha = 0.95f),
+                                                FazlakaGradientMid.copy(alpha = 0.95f),
+                                            ),
                                         ),
-                                    ),
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                Icon(
-                                    imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
-                                    contentDescription = label,
-                                    tint = if (selected) {
-                                        MaterialTheme.colorScheme.onPrimary
+                                    )
+                                } else {
+                                    Modifier.background(MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.5f))
+                                }
+                                Box(
+                                    modifier = Modifier
+                                        .size(46.dp)
+                                        .clip(CircleShape)
+                                        .then(avatarBg)
+                                        .border(
+                                            width = if (selected) 2.dp else 1.5.dp,
+                                            color = if (selected) FazlakaCyan else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
+                                            shape = CircleShape,
+                                        ),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    if (avatarUrl != null) {
+                                        coil.compose.AsyncImage(
+                                            model = avatarUrl,
+                                            contentDescription = label,
+                                            contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                                            modifier = Modifier
+                                                .size(40.dp)
+                                                .clip(CircleShape),
+                                        )
                                     } else {
-                                        MaterialTheme.colorScheme.onSurfaceVariant
-                                    },
-                                    modifier = Modifier.graphicsLayer {
-                                        scaleX = scale
-                                        scaleY = scale
-                                        translationY = liftPx
-                                        alpha = if (selected) 1f else labelAlpha
-                                    },
-                                )
-                                if (item.tab == MainTab.Messages && unreadMessages > 0) {
-                                    Surface(
-                                        shape = RoundedCornerShape(50),
-                                        color = FazlakaCyan,
-                                        modifier = Modifier
-                                            .align(Alignment.TopEnd)
-                                            .padding(0.dp),
-                                    ) {
-                                        Text(
-                                            text = if (unreadMessages > 99) "99+" else "$unreadMessages",
-                                            style = MaterialTheme.typography.labelSmall,
-                                            color = Color(0xFF06202A),
-                                            modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp),
+                                        Icon(
+                                            imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
+                                            contentDescription = label,
+                                            tint = if (selected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
+                                            modifier = Modifier
+                                                .graphicsLayer {
+                                                    scaleX = scale
+                                                    scaleY = scale
+                                                    translationY = liftPx
+                                                    alpha = if (selected) 1f else labelAlpha
+                                                }
+                                                .size(22.dp),
                                         )
                                     }
+                                }
+                            } else {
+                                Box(
+                                    modifier = Modifier
+                                        .size(46.dp)
+                                        .clip(RoundedCornerShape(15.dp))
+                                        .background(
+                                            Brush.verticalGradient(
+                                                colors = if (selected) {
+                                                    listOf(
+                                                        FazlakaGradientStart.copy(alpha = 0.95f),
+                                                        FazlakaGradientMid.copy(alpha = 0.95f),
+                                                    )
+                                                } else {
+                                                    listOf(Color.Transparent, Color.Transparent)
+                                                },
+                                            ),
+                                        ),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Icon(
+                                        imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
+                                        contentDescription = label,
+                                        tint = if (selected) {
+                                            MaterialTheme.colorScheme.onPrimary
+                                        } else {
+                                            MaterialTheme.colorScheme.onSurfaceVariant
+                                        },
+                                        modifier = Modifier.graphicsLayer {
+                                            scaleX = scale
+                                            scaleY = scale
+                                            translationY = liftPx
+                                            alpha = if (selected) 1f else labelAlpha
+                                        },
+                                    )
                                 }
                             }
                         },
@@ -387,50 +441,6 @@ private fun BottomNavBar(
                         ),
                     )
                 }
-
-                // "المزيد" — opens the rich bottom-sheet menu (settings,
-                // security, privacy, terms, support…).
-                NavigationBarItem(
-                    selected = false,
-                    onClick = onOpenMore,
-                    icon = {
-                        Box(
-                            modifier = Modifier
-                                .size(46.dp)
-                                .clip(RoundedCornerShape(15.dp))
-                                .background(
-                                    Brush.verticalGradient(
-                                        listOf(
-                                            FazlakaGradientStart.copy(alpha = 0.18f),
-                                            FazlakaGradientMid.copy(alpha = 0.18f),
-                                        ),
-                                    ),
-                                ),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.MoreHoriz,
-                                contentDescription = moreLabel,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(24.dp),
-                            )
-                        }
-                    },
-                    label = {
-                        Text(
-                            moreLabel,
-                            maxLines = 1,
-                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
-                        )
-                    },
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = MaterialTheme.colorScheme.primary,
-                        selectedTextColor = MaterialTheme.colorScheme.primary,
-                        indicatorColor = Color.Transparent,
-                        unselectedIconColor = MaterialTheme.colorScheme.primary,
-                        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    ),
-                )
             }
         }
         // Gradient top accent line on the floating bar

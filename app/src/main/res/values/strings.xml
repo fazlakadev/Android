@@ -29,6 +29,23 @@
     <string name="tab_messages">الرسائل</string>
     <string name="tab_profile">حسابي</string>
     <string name="tab_more">المزيد</string>
+    <string name="tab_settings">الإعدادات</string>
+
+    <!-- Drawer -->
+    <string name="drawer_title">فذلكة</string>
+    <string name="drawer_subtitle">المحتوى العربي في مكان واحد</string>
+    <string name="drawer_articles">المقالات</string>
+    <string name="drawer_articles_sub">اقرأ أحدث المقالات والمدونات</string>
+    <string name="drawer_episodes">الحلقات</string>
+    <string name="drawer_episodes_sub">تابع أحدث الحلقات المتوفرة</string>
+    <string name="drawer_seasons">المواسم</string>
+    <string name="drawer_seasons_sub">استكشف جميع المواسم</string>
+    <string name="drawer_playlists">قوائم التشغيل</string>
+    <string name="drawer_playlists_sub">قوائمك المفضلة والمحفوظة</string>
+    <string name="drawer_messages">الرسائل</string>
+    <string name="drawer_messages_sub">محادثاتك الخاصة والمجموعات</string>
+    <string name="drawer_divider_content">المحتوى</string>
+    <string name="drawer_divider_info">معلومات</string>
 
     <!-- More sheet -->
     <string name="more_title">المزيد من فذلكة</string>

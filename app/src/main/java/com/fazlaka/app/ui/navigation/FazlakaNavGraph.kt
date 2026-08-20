@@ -301,6 +301,7 @@ fun FazlakaNavGraph(
             SettingsScreen(
                 onBack = { navController.popBackStack() },
                 onNavigate = { navController.navigate(it) },
+                showBackButton = true,
             )
         }
         composable(Routes.EDIT_PROFILE) {
