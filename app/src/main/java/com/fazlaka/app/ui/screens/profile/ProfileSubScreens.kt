@@ -14,8 +14,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,10 +32,14 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -45,6 +52,7 @@ import com.fazlaka.app.ui.components.ListSkeleton
 import com.fazlaka.app.ui.components.PosterImage
 import com.fazlaka.app.ui.navigation.Routes
 import com.fazlaka.app.ui.util.formatDuration
+import com.fazlaka.app.ui.util.ShareUtils
 import com.fazlaka.app.ui.util.localizedTitle
 import com.fazlaka.app.ui.viewmodel.LibraryViewModel
 
@@ -205,6 +213,7 @@ fun ReferralsScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) { viewModel.loadReferrals() }
 
+val context = LocalContext.current
     SimpleScaffold(onBack = onBack, title = stringResource(com.fazlaka.app.R.string.pf_referral_title)) { innerPadding ->
         ApiResultContent(
             result = state.referrals,
@@ -220,17 +229,45 @@ fun ReferralsScreen(
             ) {
                 Text(stringResource(com.fazlaka.app.R.string.pf_referral_share), style = MaterialTheme.typography.titleMedium)
                 Spacer(Modifier.height(8.dp))
-                Text(
-                    text = data.referralCode ?: "—",
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    text = stringResource(com.fazlaka.app.R.string.pf_referral_count_fmt, data.referrals.size),
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-            }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Text(
+                        text = data.referralCode ?: "—",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Spacer(Modifier.width(12.dp))
+                    IconButton(onClick = {
+                        val clipboard = context.getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                        clipboard.setPrimaryClip(android.content.ClipData.newPlainText("referral_code", data.referralCode ?: ""))
+                    }) {
+                        Icon(
+                            imageVector = Icons.Filled.ContentCopy,
+                            contentDescription = "نسخ",
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    Spacer(Modifier.width(8.dp))
+                    IconButton(onClick = {
+                        val code = data.referralCode ?: ""
+                        val message = context.getString(com.fazlaka.app.R.string.pf_referral_share_msg, code)
+                        com.fazlaka.app.ui.util.ShareUtils.shareText(context, message)
+                    }) {
+                        Icon(
+                            imageVector = Icons.Filled.Share,
+                            contentDescription = "مشاركة",
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(16.dp))
+                    Text(
+                        text = stringResource(com.fazlaka.app.R.string.pf_referral_count_fmt, data.referrals.size),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
         }
     }
 }

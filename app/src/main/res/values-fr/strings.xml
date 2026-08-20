@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Fazlaka</string>
-    <string name="notification_channel_media">Lecture des médias</string>
+    <string name="notification_channel_media">Lecture des mÃ©dias</string>
     <string name="notification_channel_general">Notifications</string>
     <string name="notification_channel_messages">Messages</string>
     <string name="notification_channel_social">Social</string>
-    <string name="notification_channel_content">Mises à jour du contenu</string>
+    <string name="notification_channel_content">Mises Ã  jour du contenu</string>
     <string name="notif_action_view">Voir</string>
     <string name="notif_action_open">Ouvrir</string>
-    <string name="offline_banner">Pas de connexion Internet — certaines données peuvent être obsolètes</string>
+    <string name="offline_banner">Pas de connexion Internet â€” certaines donnÃ©es peuvent Ãªtre obsolÃ¨tes</string>
 
     <!-- Common -->
-    <string name="common_loading">Chargement…</string>
-    <string name="common_retry">Réessayer</string>
+    <string name="common_loading">Chargementâ€¦</string>
+    <string name="common_retry">RÃ©essayer</string>
     <string name="common_back">Retour</string>
     <string name="common_cancel">Annuler</string>
-    <string name="common_search">Rechercher…</string>
-    <string name="common_no_data">Aucune donnée</string>
+    <string name="common_search">Rechercherâ€¦</string>
+    <string name="common_no_data">Aucune donnÃ©e</string>
     <string name="common_error">Une erreur est survenue</string>
     <string name="common_close">Fermer</string>
 
@@ -30,55 +30,55 @@
 
     <!-- More sheet -->
     <string name="more_title">Plus de Fazlaka</string>
-    <string name="more_subtitle">Réglages, sécurité, confidentialité et support — au même endroit</string>
-    <string name="more_settings">Réglages</string>
-    <string name="more_settings_sub">Apparence, langue et préférences</string>
-    <string name="more_security">Centre de sécurité</string>
-    <string name="more_security_sub">Sessions, mot de passe et vérification</string>
-    <string name="more_activity">Journal d\'activité</string>
-    <string name="more_activity_sub">Chaque action enregistrée par plateforme et appareil</string>
-    <string name="more_privacy">Politique de confidentialité</string>
-    <string name="more_privacy_sub">Comment nous traitons vos données</string>
+    <string name="more_subtitle">RÃ©glages, sÃ©curitÃ©, confidentialitÃ© et support â€” au mÃªme endroit</string>
+    <string name="more_settings">RÃ©glages</string>
+    <string name="more_settings_sub">Apparence, langue et prÃ©fÃ©rences</string>
+    <string name="more_security">Centre de sÃ©curitÃ©</string>
+    <string name="more_security_sub">Sessions, mot de passe et vÃ©rification</string>
+    <string name="more_activity">Journal d\'activitÃ©</string>
+    <string name="more_activity_sub">Chaque action enregistrÃ©e par plateforme et appareil</string>
+    <string name="more_privacy">Politique de confidentialitÃ©</string>
+    <string name="more_privacy_sub">Comment nous traitons vos donnÃ©es</string>
     <string name="more_terms">Conditions d\'utilisation</string>
-    <string name="more_terms_sub">Règles d\'utilisation de Fazlaka</string>
+    <string name="more_terms_sub">RÃ¨gles d\'utilisation de Fazlaka</string>
     <string name="more_support">Support</string>
-    <string name="more_support_sub">Créez un ticket et suivez-le</string>
-    <string name="more_about">Fazlaka — La plateforme de contenu arabe · v%1$s</string>
+    <string name="more_support_sub">CrÃ©ez un ticket et suivez-le</string>
+    <string name="more_about">Fazlaka â€” La plateforme de contenu arabe Â· v%1$s</string>
 
     <!-- Profile -->
-    <string name="sec_account">Compte et sécurité</string>
-    <string name="sec_activity">Mon activité</string>
-    <string name="sec_community">Communauté</string>
-    <string name="sec_about">À propos</string>
+    <string name="sec_account">Compte et sÃ©curitÃ©</string>
+    <string name="sec_activity">Mon activitÃ©</string>
+    <string name="sec_community">CommunautÃ©</string>
+    <string name="sec_about">Ã€ propos</string>
     <string name="pf_edit_profile">Modifier le profil</string>
-    <string name="pf_edit_profile_sub">Nom, photo, bannière et bio</string>
-    <string name="pf_security">Centre de sécurité</string>
+    <string name="pf_edit_profile_sub">Nom, photo, banniÃ¨re et bio</string>
+    <string name="pf_security">Centre de sÃ©curitÃ©</string>
     <string name="pf_security_sub">Mot de passe, 2FA et sessions</string>
     <string name="pf_email">Mon e-mail</string>
     <string name="pf_email_sub">E-mails principal et secondaires</string>
-    <string name="pf_linked">Comptes liés</string>
-    <string name="pf_linked_sub">Google · GitHub · Facebook · Téléphone</string>
-    <string name="pf_activity_log">Journal d\'activité</string>
-    <string name="pf_activity_log_sub">Chaque action enregistrée par plateforme et appareil</string>
+    <string name="pf_linked">Comptes liÃ©s</string>
+    <string name="pf_linked_sub">Google Â· GitHub Â· Facebook Â· TÃ©lÃ©phone</string>
+    <string name="pf_activity_log">Journal d\'activitÃ©</string>
+    <string name="pf_activity_log_sub">Chaque action enregistrÃ©e par plateforme et appareil</string>
     <string name="pf_history">Historique de visionnage</string>
-    <string name="pf_history_sub">Ce que vous avez regardé récemment</string>
+    <string name="pf_history_sub">Ce que vous avez regardÃ© rÃ©cemment</string>
     <string name="pf_playlists">Playlists</string>
-    <string name="pf_playlists_sub">Vos listes enregistrées</string>
+    <string name="pf_playlists_sub">Vos listes enregistrÃ©es</string>
     <string name="pf_likes">J\'aime</string>
-    <string name="pf_likes_sub">Le contenu que vous avez aimé</string>
+    <string name="pf_likes_sub">Le contenu que vous avez aimÃ©</string>
     <string name="pf_friends">Amis</string>
     <string name="pf_friends_sub">Vos amis et demandes</string>
     <string name="pf_notifications">Notifications</string>
-    <string name="pf_notifications_sub">Dernières mises à jour</string>
+    <string name="pf_notifications_sub">DerniÃ¨res mises Ã  jour</string>
     <string name="pf_referral">Code d\'invitation</string>
     <string name="pf_referral_sub">Invitez vos amis et gagnez des avantages</string>
-    <string name="pf_settings">Réglages</string>
-    <string name="pf_settings_sub">Apparence, langue et préférences</string>
-    <string name="pf_privacy">Politique de confidentialité</string>
-    <string name="pf_privacy_sub">Comment nous traitons vos données</string>
+    <string name="pf_settings">RÃ©glages</string>
+    <string name="pf_settings_sub">Apparence, langue et prÃ©fÃ©rences</string>
+    <string name="pf_privacy">Politique de confidentialitÃ©</string>
+    <string name="pf_privacy_sub">Comment nous traitons vos donnÃ©es</string>
     <string name="pf_support">Support</string>
-    <string name="pf_support_sub">Nous sommes là pour vous aider</string>
-    <string name="pf_logout">Se déconnecter</string>
+    <string name="pf_support_sub">Nous sommes lÃ  pour vous aider</string>
+    <string name="pf_logout">Se dÃ©connecter</string>
     <string name="pf_edit_file">Modifier</string>
     <string name="stat_friends">Amis</string>
     <string name="stat_ratings">Avis</string>
@@ -86,28 +86,28 @@
     <string name="stat_articles">Articles</string>
 
     <!-- Chat -->
-    <string name="chat_private">Conversation privée</string>
+    <string name="chat_private">Conversation privÃ©e</string>
     <string name="chat_members_fmt">%1$d membres</string>
-    <string name="chat_input_hint">Écrivez un message…</string>
+    <string name="chat_input_hint">Ã‰crivez un messageâ€¦</string>
     <string name="chat_today">Aujourd\'hui</string>
     <string name="chat_yesterday">Hier</string>
-    <string name="chat_attach_photo">📷 Prendre une photo</string>
-    <string name="chat_attach_video">🎬 Filmer une vidéo</string>
-    <string name="chat_attach_gallery_image">🖼️ Photo de la galerie</string>
-    <string name="chat_attach_gallery_video">🎞️ Vidéo de la galerie</string>
-    <string name="chat_attach_audio">🎵 Fichier audio</string>
+    <string name="chat_attach_photo">ðŸ“· Prendre une photo</string>
+    <string name="chat_attach_video">ðŸŽ¬ Filmer une vidÃ©o</string>
+    <string name="chat_attach_gallery_image">ðŸ–¼ï¸ Photo de la galerie</string>
+    <string name="chat_attach_gallery_video">ðŸŽžï¸ VidÃ©o de la galerie</string>
+    <string name="chat_attach_audio">ðŸŽµ Fichier audio</string>
     <string name="chat_record_hint">Maintenez pour enregistrer</string>
     <string name="chat_to_last">Vers le dernier message</string>
     <string name="chat_send">Envoyer</string>
     <string name="chat_attach">Joindre</string>
-    <string name="chat_msg_image">📷 Photo</string>
-    <string name="chat_msg_video">🎬 Vidéo</string>
-    <string name="chat_msg_voice">🎤 Message vocal</string>
+    <string name="chat_msg_image">ðŸ“· Photo</string>
+    <string name="chat_msg_video">ðŸŽ¬ VidÃ©o</string>
+    <string name="chat_msg_voice">ðŸŽ¤ Message vocal</string>
 
     <!-- Messages list -->
     <string name="msgs_title">Messages</string>
-    <string name="msgs_subtitle">Vos conversations privées et groupes au même endroit</string>
-    <string name="msgs_conv_fmt">💬 %1$d conversations</string>
+    <string name="msgs_subtitle">Vos conversations privÃ©es et groupes au mÃªme endroit</string>
+    <string name="msgs_conv_fmt">ðŸ’¬ %1$d conversations</string>
     <string name="msgs_empty">Aucune conversation</string>
     <string name="msgs_empty_sub">Commencez une discussion avec un ami</string>
 
@@ -115,159 +115,159 @@
     <string name="fr_tab_friends">Amis</string>
     <string name="fr_tab_requests">Demandes</string>
     <string name="fr_tab_suggestions">Suggestions</string>
-    <string name="fr_search_hint">Rechercher des amis par nom ou identifiant…</string>
-    <string name="fr_friends_fmt">👥 %1$d amis</string>
+    <string name="fr_search_hint">Rechercher des amis par nom ou identifiantâ€¦</string>
+    <string name="fr_friends_fmt">ðŸ‘¥ %1$d amis</string>
     <string name="fr_add">Ajouter</string>
     <string name="fr_accept">Accepter</string>
     <string name="fr_reject">Refuser</string>
     <string name="fr_remove">Retirer des amis</string>
     <string name="delete">Supprimer</string>
-    <string name="double_tap_exit">Appuyez à nouveau pour quitter</string>
+    <string name="double_tap_exit">Appuyez Ã  nouveau pour quitter</string>
     <string name="fr_block">Bloquer</string>
     <string name="fr_message">Message</string>
     <string name="fr_pending">En attente</string>
-    <string name="fr_incoming">Reçues</string>
-    <string name="fr_outgoing">Envoyées</string>
+    <string name="fr_incoming">ReÃ§ues</string>
+    <string name="fr_outgoing">EnvoyÃ©es</string>
     <string name="fr_empty">Aucun ami</string>
     <string name="fr_empty_sub">Trouvez et ajoutez des amis depuis l\'onglet Suggestions</string>
-    <string name="fr_requests_empty">Aucune demande reçue</string>
-    <string name="fr_outgoing_empty">Aucune demande envoyée</string>
-    <string name="fr_outgoing_empty_sub">Vos demandes pas encore acceptées apparaîtront ici</string>
+    <string name="fr_requests_empty">Aucune demande reÃ§ue</string>
+    <string name="fr_outgoing_empty">Aucune demande envoyÃ©e</string>
+    <string name="fr_outgoing_empty_sub">Vos demandes pas encore acceptÃ©es apparaÃ®tront ici</string>
     <string name="fr_sugg_empty">Aucune suggestion</string>
-    <string name="fr_no_results">Aucun résultat correspondant</string>
+    <string name="fr_no_results">Aucun rÃ©sultat correspondant</string>
 
     <!-- Settings -->
     <string name="st_appearance">Apparence</string>
     <string name="st_dark_mode">Mode sombre</string>
     <string name="st_language">Langue</string>
-    <string name="st_account_security">Compte et sécurité</string>
+    <string name="st_account_security">Compte et sÃ©curitÃ©</string>
     <string name="st_edit_profile">Modifier le profil</string>
-    <string name="st_security_sessions">Sécurité et sessions</string>
+    <string name="st_security_sessions">SÃ©curitÃ© et sessions</string>
     <string name="st_support">Support</string>
-    <string name="st_about">À propos</string>
+    <string name="st_about">Ã€ propos</string>
     <string name="st_version">Version</string>
-    <string name="st_tagline">Fazlaka — La plateforme de contenu arabe</string>
-    <string name="st_hero_title">Réglages</string>
-    <string name="st_hero_sub">Personnalisez votre expérience : apparence, langue et sécurité</string>
-    <string name="st_hero_badge">⚙️ Fazlaka</string>
+    <string name="st_tagline">Fazlaka â€” La plateforme de contenu arabe</string>
+    <string name="st_hero_title">RÃ©glages</string>
+    <string name="st_hero_sub">Personnalisez votre expÃ©rience : apparence, langue et sÃ©curitÃ©</string>
+    <string name="st_hero_badge">âš™ï¸ Fazlaka</string>
     <string name="st_notifications">Notifications</string>
     <string name="st_login_alerts">Alertes de connexion</string>
     <string name="st_delete_account">Supprimer le compte</string>
-    <string name="st_delete_account_confirm">Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.</string>
+    <string name="st_delete_account_confirm">ÃŠtes-vous sÃ»r de vouloir supprimer votre compte ? Cette action est irrÃ©versible.</string>
     <string name="st_delete_account_title">Supprimer le compte</string>
-    <string name="st_delete_account_desc">Votre compte et toutes vos données seront définitivement supprimés</string>
+    <string name="st_delete_account_desc">Votre compte et toutes vos donnÃ©es seront dÃ©finitivement supprimÃ©s</string>
 
     <!-- Home hero -->
-    <string name="home_hero_sub">Bienvenue — suivez les derniers épisodes et articles</string>
-    <string name="home_hero_badge">✨ La plateforme de contenu arabe</string>
+    <string name="home_hero_sub">Bienvenue â€” suivez les derniers Ã©pisodes et articles</string>
+    <string name="home_hero_badge">âœ¨ La plateforme de contenu arabe</string>
     <string name="home_for_you">Pour vous</string>
-    <string name="home_latest">Derniers épisodes</string>
+    <string name="home_latest">Derniers Ã©pisodes</string>
     <string name="home_all">Tout</string>
 
     <!-- Search hero -->
     <string name="search_hero_title">Recherche</string>
-    <string name="search_hero_sub">Recherchez épisodes, saisons, articles et utilisateurs</string>
-    <string name="search_hero_badge">🔍 Découvrez plus</string>
+    <string name="search_hero_sub">Recherchez Ã©pisodes, saisons, articles et utilisateurs</string>
+    <string name="search_hero_badge">ðŸ” DÃ©couvrez plus</string>
 
     <!-- Seasons hero -->
     <string name="seasons_hero_title">Saisons</string>
-    <string name="seasons_hero_sub">Explorez les saisons de Fazlaka et vos épisodes préférés</string>
-    <string name="seasons_fmt">🎬 %1$d saisons</string>
+    <string name="seasons_hero_sub">Explorez les saisons de Fazlaka et vos Ã©pisodes prÃ©fÃ©rÃ©s</string>
+    <string name="seasons_fmt">ðŸŽ¬ %1$d saisons</string>
 
     <!-- Onboarding -->
-    <string name="onboarding_subtitle">La plateforme de contenu, épisodes et articles arabes</string>
+    <string name="onboarding_subtitle">La plateforme de contenu, Ã©pisodes et articles arabes</string>
     <string name="onboarding_login">Se connecter</string>
-    <string name="onboarding_register">Créer un compte</string>
-    <string name="onboarding_phone">Connexion par numéro de téléphone</string>
-    <string name="onboarding_guest">Parcourir en tant qu\'invité</string>
+    <string name="onboarding_register">CrÃ©er un compte</string>
+    <string name="onboarding_phone">Connexion par numÃ©ro de tÃ©lÃ©phone</string>
+    <string name="onboarding_guest">Parcourir en tant qu\'invitÃ©</string>
 
     <!-- Auth common -->
     <string name="auth_or_divider">Ou continuer avec</string>
     <string name="auth_no_account">Vous n\'avez pas de compte?</string>
-    <string name="auth_has_account">Vous avez déjà un compte?</string>
-    <string name="auth_create_account">Créer un nouveau compte</string>
+    <string name="auth_has_account">Vous avez dÃ©jÃ  un compte?</string>
+    <string name="auth_create_account">CrÃ©er un nouveau compte</string>
     <string name="auth_login_link">Se connecter</string>
 
     <!-- Login -->
     <string name="login_title">Bon retour</string>
-    <string name="login_subtitle">Connectez-vous pour continuer à regarder</string>
+    <string name="login_subtitle">Connectez-vous pour continuer Ã  regarder</string>
     <string name="login_email">Email</string>
     <string name="login_password">Mot de passe</string>
-    <string name="login_forgot">Mot de passe oublié?</string>
+    <string name="login_forgot">Mot de passe oubliÃ©?</string>
     <string name="login_submit">Se connecter</string>
 
     <!-- Register -->
-    <string name="register_title">Créer un nouveau compte</string>
-    <string name="register_subtitle">Rejoignez la communauté Fazlaka et profitez du contenu</string>
+    <string name="register_title">CrÃ©er un nouveau compte</string>
+    <string name="register_subtitle">Rejoignez la communautÃ© Fazlaka et profitez du contenu</string>
     <string name="register_name">Nom</string>
     <string name="register_username">Nom d\'utilisateur</string>
     <string name="register_email">Email</string>
-    <string name="register_password">Mot de passe (8 caractères min)</string>
+    <string name="register_password">Mot de passe (8 caractÃ¨res min)</string>
     <string name="register_referral">Code d\'invitation (optionnel)</string>
     <string name="register_submit">S\'inscrire</string>
 
     <!-- Forgot password -->
-    <string name="forgot_title">Réinitialiser le mot de passe</string>
-    <string name="forgot_subtitle">Entrez votre email et nous vous enverrons un code de récupération</string>
-    <string name="forgot_submit">Envoyer le code de récupération</string>
+    <string name="forgot_title">RÃ©initialiser le mot de passe</string>
+    <string name="forgot_subtitle">Entrez votre email et nous vous enverrons un code de rÃ©cupÃ©ration</string>
+    <string name="forgot_submit">Envoyer le code de rÃ©cupÃ©ration</string>
 
     <!-- Reset password -->
     <string name="reset_title">Nouveau mot de passe</string>
-    <string name="reset_subtitle_fmt">Entrez le code envoyé à %1$s\npuis choisissez un nouveau mot de passe</string>
-    <string name="reset_new_password">Nouveau mot de passe (8 caractères min)</string>
+    <string name="reset_subtitle_fmt">Entrez le code envoyÃ© Ã  %1$s\npuis choisissez un nouveau mot de passe</string>
+    <string name="reset_new_password">Nouveau mot de passe (8 caractÃ¨res min)</string>
     <string name="reset_confirm">Confirmer le mot de passe</string>
     <string name="reset_mismatch">Les mots de passe ne correspondent pas</string>
     <string name="reset_submit">Enregistrer le mot de passe</string>
 
     <!-- Verify email -->
-    <string name="verify_title">Vérifiez votre email</string>
-    <string name="verify_subtitle">Entrez le code à 6 chiffres envoyé à</string>
+    <string name="verify_title">VÃ©rifiez votre email</string>
+    <string name="verify_subtitle">Entrez le code Ã  6 chiffres envoyÃ© Ã </string>
     <string name="verify_submit">Confirmer l\'email</string>
-    <string name="verify_resent">Un nouveau code a été envoyé à votre email</string>
-    <string name="verify_resend">Vous n\'avez pas reçu le code? Renvoyer</string>
+    <string name="verify_resent">Un nouveau code a Ã©tÃ© envoyÃ© Ã  votre email</string>
+    <string name="verify_resend">Vous n\'avez pas reÃ§u le code? Renvoyer</string>
     <string name="verify_resend_cooldown">Vous pouvez renvoyer dans %1$ss</string>
     <string name="verify_change_email">Changer d\'email</string>
 
     <!-- 2FA -->
-    <string name="twofa_title">Authentification à deux facteurs</string>
-    <string name="twofa_subtitle">Entrez le code envoyé à votre email</string>
-    <string name="twofa_submit">Vérifier</string>
+    <string name="twofa_title">Authentification Ã  deux facteurs</string>
+    <string name="twofa_subtitle">Entrez le code envoyÃ© Ã  votre email</string>
+    <string name="twofa_submit">VÃ©rifier</string>
 
     <!-- Phone auth -->
-    <string name="phone_title_register">Inscription par téléphone</string>
-    <string name="phone_title_login">Connexion par téléphone</string>
-    <string name="phone_subtitle_register">Créez votre compte avec votre numéro de téléphone</string>
-    <string name="phone_subtitle_login">Entrez votre numéro pour recevoir un code de vérification</string>
-    <string name="phone_number">Numéro de téléphone (ex: +212…)</string>
+    <string name="phone_title_register">Inscription par tÃ©lÃ©phone</string>
+    <string name="phone_title_login">Connexion par tÃ©lÃ©phone</string>
+    <string name="phone_subtitle_register">CrÃ©ez votre compte avec votre numÃ©ro de tÃ©lÃ©phone</string>
+    <string name="phone_subtitle_login">Entrez votre numÃ©ro pour recevoir un code de vÃ©rification</string>
+    <string name="phone_number">NumÃ©ro de tÃ©lÃ©phone (ex: +212â€¦)</string>
     <string name="phone_send_code">Envoyer le code</string>
-    <string name="phone_sent_to">Code de vérification envoyé à:</string>
-    <string name="phone_verify">Vérifier</string>
+    <string name="phone_sent_to">Code de vÃ©rification envoyÃ© Ã :</string>
+    <string name="phone_verify">VÃ©rifier</string>
 
     <!-- Home -->
-    <string name="home_error">Échec du chargement de la page d\'accueil</string>
+    <string name="home_error">Ã‰chec du chargement de la page d\'accueil</string>
 
     <!-- Notifications -->
     <string name="notif_title">Notifications</string>
-    <string name="notif_subtitle">Toutes les nouvelles mises à jour en un seul endroit</string>
-    <string name="notif_unread_fmt">🔔 %1$d non lues</string>
+    <string name="notif_subtitle">Toutes les nouvelles mises Ã  jour en un seul endroit</string>
+    <string name="notif_unread_fmt">ðŸ”” %1$d non lues</string>
     <string name="notif_unread_count">Non lues (%1$d)</string>
     <string name="notif_mark_all_read">Tout marquer comme lu</string>
     <string name="notif_empty">Aucune notification</string>
     <string name="notif_friend_request">Nouvelle demande d\'ami</string>
-    <string name="notif_support_update">Mise à jour du support</string>
+    <string name="notif_support_update">Mise Ã  jour du support</string>
     <string name="notif_friend_request_body">Vous avez une nouvelle demande d\'ami</string>
-    <string name="notif_support_body">Votre ticket a reçu une réponse, consultez le support</string>
+    <string name="notif_support_body">Votre ticket a reÃ§u une rÃ©ponse, consultez le support</string>
     <string name="notif_new">Nouvelle notification</string>
 
     <!-- Seasons -->
     <string name="seasons_empty">Aucune saison pour le moment</string>
-    <string name="seasons_empty_sub">Les nouvelles saisons apparaîtront ici lorsqu\'elles seront ajoutées</string>
+    <string name="seasons_empty_sub">Les nouvelles saisons apparaÃ®tront ici lorsqu\'elles seront ajoutÃ©es</string>
 
     <!-- Episodes -->
-    <string name="episodes_all_title">Derniers épisodes</string>
-    <string name="episodes_empty">Aucun épisode pour le moment</string>
-    <string name="episodes_empty_sub">Les nouveaux épisodes apparaîtront ici lorsqu\'ils seront ajoutés</string>
-    <string name="episodes_related">Épisodes connexes</string>
+    <string name="episodes_all_title">Derniers Ã©pisodes</string>
+    <string name="episodes_empty">Aucun Ã©pisode pour le moment</string>
+    <string name="episodes_empty_sub">Les nouveaux Ã©pisodes apparaÃ®tront ici lorsqu\'ils seront ajoutÃ©s</string>
+    <string name="episodes_related">Ã‰pisodes connexes</string>
     <string name="episodes_resume_fmt">Reprendre depuis %1$s</string>
     <string name="episodes_no_desc">Aucune description</string>
 
@@ -276,13 +276,13 @@
     <string name="article_no_content">Aucun contenu</string>
 
     <!-- Search -->
-    <string name="search_placeholder">Rechercher épisodes, saisons, articles…</string>
-    <string name="search_empty">Aucun résultat</string>
-    <string name="search_results_fmt">Résultats pour: \"%1$s\"</string>
+    <string name="search_placeholder">Rechercher Ã©pisodes, saisons, articlesâ€¦</string>
+    <string name="search_empty">Aucun rÃ©sultat</string>
+    <string name="search_results_fmt">RÃ©sultats pour: \"%1$s\"</string>
     <string name="search_hint_empty">Recherchez ce que vous voulez regarder</string>
-    <string name="search_history">Recherches récentes</string>
+    <string name="search_history">Recherches rÃ©centes</string>
     <string name="search_clear_all">Tout effacer</string>
-    <string name="search_press_search">Appuyez sur recherche pour les résultats complets</string>
+    <string name="search_press_search">Appuyez sur recherche pour les rÃ©sultats complets</string>
 
     <!-- Messages -->
     <string name="msg_group">Groupe</string>
@@ -290,30 +290,30 @@
 
     <!-- Conversation -->
     <string name="conv_title">Conversation</string>
-    <string name="conv_error">Échec du chargement de la conversation</string>
-    <string name="conv_close_hint">Appuyez pour fermer · Pincez pour zoomer</string>
+    <string name="conv_error">Ã‰chec du chargement de la conversation</string>
+    <string name="conv_close_hint">Appuyez pour fermer Â· Pincez pour zoomer</string>
 
     <!-- Friends -->
     <string name="fr_search_hero_sub">Trouvez, ajoutez et connectez-vous avec vos amis sur Fazlaka</string>
     <string name="fr_block_title">Bloquer %1$s</string>
-    <string name="fr_block_text">Il ne pourra plus vous envoyer de demandes ni vous messager. Vous pouvez débloquer plus tard.</string>
+    <string name="fr_block_text">Il ne pourra plus vous envoyer de demandes ni vous messager. Vous pouvez dÃ©bloquer plus tard.</string>
     <string name="fr_cancel">Annuler</string>
-    <string name="fr_search_error">Échec de la recherche</string>
+    <string name="fr_search_error">Ã‰chec de la recherche</string>
     <string name="fr_user">Utilisateur</string>
 
     <!-- Support -->
     <string name="support_title">Support</string>
-    <string name="support_hero_sub">Notre équipe est là pour vous aider — créez un ticket et suivez-le</string>
-    <string name="support_badge">🎧 Toujours là pour vous aider</string>
-    <string name="support_new_ticket">Créer un nouveau ticket</string>
+    <string name="support_hero_sub">Notre Ã©quipe est lÃ  pour vous aider â€” crÃ©ez un ticket et suivez-le</string>
+    <string name="support_badge">ðŸŽ§ Toujours lÃ  pour vous aider</string>
+    <string name="support_new_ticket">CrÃ©er un nouveau ticket</string>
     <string name="support_subject">Sujet</string>
-    <string name="support_description">Description du problème</string>
-    <string name="support_sending">Envoi en cours…</string>
+    <string name="support_description">Description du problÃ¨me</string>
+    <string name="support_sending">Envoi en coursâ€¦</string>
     <string name="support_send">Envoyer le ticket</string>
     <string name="support_empty">Aucun ticket</string>
-    <string name="support_empty_sub">Créez un nouveau ticket et nous vous répondrons bientôt</string>
+    <string name="support_empty_sub">CrÃ©ez un nouveau ticket et nous vous rÃ©pondrons bientÃ´t</string>
     <string name="support_ticket">Ticket</string>
-    <string name="support_message_hint">Écrivez votre message…</string>
+    <string name="support_message_hint">Ã‰crivez votre messageâ€¦</string>
     <string name="support_send_message">Envoyer</string>
 
     <!-- Profile edit -->
@@ -322,31 +322,31 @@
     <string name="edit_profile_username">Nom d\'utilisateur</string>
     <string name="edit_profile_bio">Bio</string>
     <string name="edit_profile_save">Enregistrer</string>
-    <string name="edit_profile_saving">Téléchargement…</string>
-    <string name="edit_profile_saved">Modifications enregistrées</string>
+    <string name="edit_profile_saving">TÃ©lÃ©chargementâ€¦</string>
+    <string name="edit_profile_saved">Modifications enregistrÃ©es</string>
     <string name="edit_profile_cover">Changer la photo de couverture</string>
 
     <!-- Profile sub -->
     <string name="pf_history_title">Historique de visionnage</string>
     <string name="pf_history_empty">Aucun historique de visionnage</string>
-    <string name="pf_progress_title">Continuer à regarder</string>
-    <string name="pf_progress_empty">Aucune progression sauvegardée</string>
+    <string name="pf_progress_title">Continuer Ã  regarder</string>
+    <string name="pf_progress_empty">Aucune progression sauvegardÃ©e</string>
     <string name="pf_playlists_title">Listes de lecture</string>
     <string name="pf_playlists_empty">Aucune liste de lecture</string>
     <string name="pf_likes_title">J\'aime</string>
     <string name="pf_likes_empty">Aucun j\'aime</string>
     <string name="pf_referral_title">Code d\'invitation</string>
-    <string name="pf_referral_empty">Aucun invité pour le moment</string>
+    <string name="pf_referral_empty">Aucun invitÃ© pour le moment</string>
     <string name="pf_referral_share">Partagez votre code pour inviter des amis</string>
-    <string name="pf_referral_count_fmt">Personnes inscrites via votre code: %1$d</string>
-    <string name="pf_complete">Terminé</string>
+    <string name="pf_referral_count_fmt">Personnes inscrites via votre code: %1$d</string>`n    <string name="pf_referral_share_msg">Rejoignez Fazlaka avec mon code: %s</string>
+    <string name="pf_complete">TerminÃ©</string>
     <string name="pf_clear_history">Effacer l\'historique</string>
 
     <!-- User profile -->
     <string name="up_stats_friends">Amis</string>
-    <string name="up_stats_ratings">Évaluations</string>
+    <string name="up_stats_ratings">Ã‰valuations</string>
     <string name="up_stats_articles">Articles</string>
-    <string name="up_unblock">Débloquer</string>
+    <string name="up_unblock">DÃ©bloquer</string>
     <string name="up_send_message">Envoyer un message</string>
     <string name="up_remove_friend">Retirer des amis</string>
     <string name="up_block">Bloquer</string>
@@ -354,22 +354,22 @@
     <string name="up_reject">Refuser</string>
     <string name="up_pending">Demande d\'ami en attente</string>
     <string name="up_add_friend">Ajouter en ami</string>
-    <string name="up_conv_error">Échec de l\'ouverture de la conversation, réessayez</string>
+    <string name="up_conv_error">Ã‰chec de l\'ouverture de la conversation, rÃ©essayez</string>
     <string name="up_user">Utilisateur</string>
-    <string name="up_close">Appuyez n\'importe où pour fermer</string>
+    <string name="up_close">Appuyez n\'importe oÃ¹ pour fermer</string>
 
     <!-- Settings -->
     <string name="st_language_arabic">Arabe</string>
 
     <!-- Item counts -->
-    <string name="item_count_fmt">%1$d éléments</string>
-    <string name="episode_label">Épisode %1$d</string>
+    <string name="item_count_fmt">%1$d Ã©lÃ©ments</string>
+    <string name="episode_label">Ã‰pisode %1$d</string>
 
     <!-- Item counts with unit -->
-    <string name="count_episodes_fmt">%1$d épisodes</string>
+    <string name="count_episodes_fmt">%1$d Ã©pisodes</string>
 
     <!-- Accessibility -->
-    <string name="accessibility_play_episode">Lancer l\'épisode</string>
+    <string name="accessibility_play_episode">Lancer l\'Ã©pisode</string>
     <string name="accessibility_pause_episode">Mettre en pause</string>
     <string name="accessibility_share">Partager</string>
     <string name="accessibility_back">Retour</string>
@@ -380,27 +380,28 @@
     <string name="accessibility_mini_player_title">Lecteur miniature</string>
     <string name="accessibility_mini_player_close">Fermer le lecteur miniature</string>
     <string name="accessibility_skip_next">Suivant</string>
-    <string name="accessibility_skip_previous">Précédent</string>
+    <string name="accessibility_skip_previous">PrÃ©cÃ©dent</string>
     <string name="accessibility_like">J\'aime</string>
     <string name="accessibility_remove_like">Retirer le j\'aime</string>
     <string name="accessibility_clear_search">Effacer la recherche</string>
-    <string name="accessibility_search_history_item">Élément dans l\'historique</string>
+    <string name="accessibility_search_history_item">Ã‰lÃ©ment dans l\'historique</string>
     <string name="accessibility_remove_search_item">Supprimer de l\'historique</string>
     <string name="accessibility_offline">Hors ligne</string>
-    <string name="accessibility_episode_row_fmt"> Épisode %1$s. Appuyez pour voir les détails</string>
-    <string name="accessibility_banner_fmt">Bannière %1$s</string>
+    <string name="accessibility_episode_row_fmt"> Ã‰pisode %1$s. Appuyez pour voir les dÃ©tails</string>
+    <string name="accessibility_banner_fmt">BanniÃ¨re %1$s</string>
     <string name="accessibility_resume_episode">Reprendre depuis %1$s</string>
     <string name="accessibility_filter_chip_fmt">Filtrer %1$s</string>
-    <string name="accessibility_navigation_bar">Barre de navigation inférieure</string>
+    <string name="accessibility_navigation_bar">Barre de navigation infÃ©rieure</string>
 
     <!-- Update -->
-    <string name="update_title">Nouvelle mise à jour disponible</string>
-    <string name="update_version_format">Version %1$s → %2$s</string>
+    <string name="update_title">Nouvelle mise Ã  jour disponible</string>
+    <string name="update_version_format">Version %1$s â†’ %2$s</string>
     <string name="update_release_notes">Notes de la version</string>
-    <string name="update_downloading_format">Téléchargement… %1$d%%</string>
-    <string name="update_download_install">Télécharger et installer</string>
+    <string name="update_downloading_format">TÃ©lÃ©chargementâ€¦ %1$d%%</string>
+    <string name="update_download_install">TÃ©lÃ©charger et installer</string>
     <string name="update_later">Plus tard</string>
     <string name="update_skip">Ignorer cette version</string>
-    <string name="update_install">Installation…</string>
-    <string name="update_error">Une erreur est survenue lors de la mise à jour</string>
+    <string name="update_install">Installationâ€¦</string>
+    <string name="update_error">Une erreur est survenue lors de la mise Ã  jour</string>
 </resources>
+

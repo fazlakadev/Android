@@ -340,6 +340,7 @@
     <string name="pf_referral_title">كود الدعوة</string>
     <string name="pf_referral_empty">لا يوجد مدعوون بعد</string>
     <string name="pf_referral_share">شارك كودك ليدعوك أصدقاؤك</string>
+    <string name="pf_referral_share_msg">انضم إلى فذلكة بكودي: %s</string>
     <string name="pf_referral_count_fmt">الأشخاص الذين انضموا عبر كودك: %1$d</string>
     <string name="pf_complete">مكتمل</string>
     <string name="pf_clear_history">مسح السجل</string>

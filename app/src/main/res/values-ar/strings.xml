@@ -74,6 +74,7 @@
     <string name="pf_notifications_sub">آخر التحديثات</string>
     <string name="pf_referral">كود الدعوة</string>
     <string name="pf_referral_sub">ادعُ أصدقاءك واكسب مزايا</string>
+    <string name="pf_referral_share_msg">انضم إلى فذلكة بكودي: %s</string>
     <string name="pf_settings">الإعدادات</string>
     <string name="pf_settings_sub">المظهر واللغة والتفضيلات</string>
     <string name="pf_privacy">سياسة الخصوصية</string>
