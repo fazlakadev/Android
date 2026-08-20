@@ -16,6 +16,7 @@
     <string name="common_loading">جارٍ التحميل…</string>
     <string name="common_retry">إعادة المحاولة</string>
     <string name="common_back">رجوع</string>
+    <string name="common_cancel">إلغاء</string>
     <string name="common_search">ابحث…</string>
     <string name="common_no_data">لا توجد بيانات</string>
     <string name="common_error">حدث خطأ ما</string>
@@ -149,6 +150,12 @@
     <string name="st_hero_title">الإعدادات</string>
     <string name="st_hero_sub">خصّص تجربتك: المظهر، اللغة، والأمان</string>
     <string name="st_hero_badge">⚙️ فذلكة</string>
+    <string name="st_notifications">الإشعارات</string>
+    <string name="st_login_alerts">تنبيهات تسجيل الدخول</string>
+    <string name="st_delete_account">حذف الحساب</string>
+    <string name="st_delete_account_confirm">هل أنت متأكد من حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.</string>
+    <string name="st_delete_account_title">حذف الحساب</string>
+    <string name="st_delete_account_desc">سيتم حذف حسابك وجميع بياناتك نهائياً</string>
 
     <!-- Home hero -->
     <string name="home_hero_sub">أهلاً بك — تابع أحدث الحلقات والمقالات</string>

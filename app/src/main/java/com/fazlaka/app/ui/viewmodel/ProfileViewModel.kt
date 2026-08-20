@@ -111,16 +111,19 @@ class ProfileViewModel @Inject constructor(
     private fun buildPart(uri: Uri, isAvatar: Boolean): MultipartBody.Part? {
         return try {
             val resolver = context.contentResolver
-            val name = "image"
             val mime = resolver.getType(uri) ?: "image/jpeg"
             val body = resolver.openInputStream(uri)?.use { stream ->
                 val bytes = stream.readBytes()
+                if (bytes.size > 5 * 1024 * 1024) {
+                    _state.value = _state.value.copy(error = "Image too large (max 5MB)")
+                    return null
+                }
                 bytes.toRequestBody(mime.toMediaTypeOrNull())
             } ?: return null
-            val filename = "${name}_${System.currentTimeMillis()}.jpg"
-            val partName = if (isAvatar) "avatar" else "banner"
-            MultipartBody.Part.createFormData(partName, filename, body)
+            val filename = "image_${System.currentTimeMillis()}.jpg"
+            MultipartBody.Part.createFormData("file", filename, body)
         } catch (e: Exception) {
+            _state.value = _state.value.copy(error = "Failed to read image")
             null
         }
     }

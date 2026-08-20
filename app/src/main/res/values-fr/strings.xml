@@ -14,6 +14,7 @@
     <string name="common_loading">Chargement…</string>
     <string name="common_retry">Réessayer</string>
     <string name="common_back">Retour</string>
+    <string name="common_cancel">Annuler</string>
     <string name="common_search">Rechercher…</string>
     <string name="common_no_data">Aucune donnée</string>
     <string name="common_error">Une erreur est survenue</string>
@@ -149,6 +150,12 @@
     <string name="st_hero_title">Réglages</string>
     <string name="st_hero_sub">Personnalisez votre expérience : apparence, langue et sécurité</string>
     <string name="st_hero_badge">⚙️ Fazlaka</string>
+    <string name="st_notifications">Notifications</string>
+    <string name="st_login_alerts">Alertes de connexion</string>
+    <string name="st_delete_account">Supprimer le compte</string>
+    <string name="st_delete_account_confirm">Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.</string>
+    <string name="st_delete_account_title">Supprimer le compte</string>
+    <string name="st_delete_account_desc">Votre compte et toutes vos données seront définitivement supprimés</string>
 
     <!-- Home hero -->
     <string name="home_hero_sub">Bienvenue — suivez les derniers épisodes et articles</string>
