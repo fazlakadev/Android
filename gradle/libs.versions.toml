@@ -23,6 +23,9 @@ firebaseMessaging = "24.1.0"
 firebaseAnalytics = "22.1.0"
 googleServices = "4.4.2"
 coreSplashscreen = "1.0.1"
+credentials = "1.3.0"
+playServicesAuth = "21.3.0"
+googleId = "1.1.1"
 
 [libraries]
 # Compose
@@ -81,6 +84,12 @@ pusher-java-client = { group = "com.pusher", name = "pusher-java-client", versio
 
 # Location
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+
+# Google Identity (Credential Manager)
+credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
+credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
+googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleId" }
 
 # Firebase
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessaging" }

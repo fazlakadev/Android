@@ -131,7 +131,7 @@ fun RegisterScreen(
             OrDivider(text = androidx.compose.ui.res.stringResource(com.fazlaka.app.R.string.auth_or_divider))
             Spacer(Modifier.height(18.dp))
             SocialIconRow(
-                onGoogle = { onNavigate(Routes.oauth("google")) },
+                onGoogle = { viewModel.googleSignIn {} },
                 onGitHub = { onNavigate(Routes.oauth("github")) },
                 onFacebook = { onNavigate(Routes.oauth("facebook")) },
                 modifier = Modifier.align(Alignment.CenterHorizontally),

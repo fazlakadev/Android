@@ -115,6 +115,9 @@ interface ApiService {
     @POST("auth/login")
     suspend fun login(@Body body: com.fazlaka.app.core.model.dto.LoginRequest): ApiEnvelope<AuthResultDto>
 
+    @POST("auth/google/native")
+    suspend fun googleNativeLogin(@Body body: com.fazlaka.app.core.model.dto.GoogleNativeLoginRequest): ApiEnvelope<AuthResultDto>
+
     @POST("auth/login/2fa")
     suspend fun loginTwoFactor(@Body body: TwoFactorVerifyRequest): ApiEnvelope<AuthResultDto>
 

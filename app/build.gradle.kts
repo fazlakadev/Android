@@ -16,8 +16,8 @@ android {
         applicationId = "com.fazlaka.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 11
-        versionName = "1.2.0"
+        versionCode = 12
+        versionName = "1.3.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -34,6 +34,7 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "API_BASE_URL", "\"https://back-end-hq0is.faable.link/api/v1/\"")
+            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"\"")
             buildConfigField("String", "PUSHER_KEY", "\"\"")
             buildConfigField("String", "PUSHER_CLUSTER", "\"eu\"")
         }
@@ -46,6 +47,7 @@ android {
                 "proguard-rules.pro",
             )
             buildConfigField("String", "API_BASE_URL", "\"https://back-end-hq0is.faable.link/api/v1/\"")
+            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"\"")
             buildConfigField("String", "PUSHER_KEY", "\"\"")
             buildConfigField("String", "PUSHER_CLUSTER", "\"eu\"")
         }
@@ -132,6 +134,12 @@ dependencies {
 
     // Biometric
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    // Google Identity (Credential Manager)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.play.services.auth)
+    implementation(libs.googleid)
 
     // Glance (Home Widget)
     implementation("androidx.glance:glance-appwidget:1.1.1")

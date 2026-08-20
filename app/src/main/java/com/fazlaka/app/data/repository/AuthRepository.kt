@@ -43,6 +43,9 @@ class AuthRepository(
     suspend fun login(email: String, password: String): ApiResult<AuthResultDto> =
         safeApiCall({ api.login(LoginRequest(email, password)) }, json)
 
+    suspend fun googleNativeLogin(idToken: String): ApiResult<AuthResultDto> =
+        safeApiCall({ api.googleNativeLogin(com.fazlaka.app.core.model.dto.GoogleNativeLoginRequest(idToken)) }, json)
+
     suspend fun register(request: RegisterRequest): ApiResult<AuthResultDto> =
         safeApiCall({ api.register(request) }, json)
 

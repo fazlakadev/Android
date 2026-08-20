@@ -7,6 +7,8 @@ import com.fazlaka.app.core.model.dto.AuthResultDto
 import com.fazlaka.app.core.model.dto.PhoneChallengeDto
 import com.fazlaka.app.core.network.ApiResult
 import com.fazlaka.app.core.notification.PushRepository
+import com.fazlaka.app.core.auth.GoogleSignInHelper
+import com.fazlaka.app.core.auth.GoogleSignInException
 import com.fazlaka.app.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,6 +34,7 @@ data class AuthUiState(
 class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val pushRepository: PushRepository,
+    private val googleSignInHelper: GoogleSignInHelper,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(AuthUiState())
@@ -78,6 +81,32 @@ class AuthViewModel @Inject constructor(
                 _state.value = AuthUiState(success = true)
             } else {
                 _state.value = AuthUiState(error = "حدث خطأ أثناء حفظ الجلسة")
+            }
+        }
+    }
+
+    fun googleNativeLogin(idToken: String, onDone: () -> Unit) {
+        viewModelScope.launch {
+            _state.value = AuthUiState(loading = true)
+            when (val r = authRepository.googleNativeLogin(idToken)) {
+                is ApiResult.Success -> handleAuthResult(r.data, onDone)
+                is ApiResult.Failure -> {
+                    _state.value = AuthUiState(error = r.localized())
+                }
+            }
+        }
+    }
+
+    fun googleSignIn(onDone: () -> Unit) {
+        viewModelScope.launch {
+            _state.value = AuthUiState(loading = true)
+            try {
+                val idToken = googleSignInHelper.signIn()
+                googleNativeLogin(idToken, onDone)
+            } catch (e: GoogleSignInException) {
+                _state.value = AuthUiState(error = e.message ?: "تعذر تسجيل الدخول عبر Google")
+            } catch (e: Exception) {
+                _state.value = AuthUiState(error = e.message ?: "تعذر تسجيل الدخول عبر Google")
             }
         }
     }
