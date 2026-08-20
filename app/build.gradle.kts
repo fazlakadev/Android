@@ -16,10 +16,19 @@ android {
         applicationId = "com.fazlaka.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 10
-        versionName = "1.1.0"
+        versionCode = 11
+        versionName = "1.2.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("fazlaka-release.keystore")
+            storePassword = "fazlaka2026"
+            keyAlias = "fazlaka"
+            keyPassword = "fazlaka2026"
+        }
     }
 
     buildTypes {
@@ -31,6 +40,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",

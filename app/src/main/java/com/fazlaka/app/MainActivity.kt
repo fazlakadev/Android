@@ -82,6 +82,7 @@ class MainActivity : ComponentActivity() {
 
             val updateViewModel: UpdateViewModel = hiltViewModel()
             val updateState by updateViewModel.updateState.collectAsStateWithLifecycle()
+            val currentState = updateState
             val updateInfo = updateViewModel.currentUpdateInfo.collectAsStateWithLifecycle().value
 
             LaunchedEffect(Unit) {
@@ -100,8 +101,8 @@ class MainActivity : ComponentActivity() {
                         isDownloading = updateState is UpdateState.Downloading ||
                             updateState is UpdateState.DownloadProgress ||
                             updateState is UpdateState.Installing,
-                        downloadProgress = when (updateState) {
-                            is UpdateState.DownloadProgress -> updateState.progress
+                        downloadProgress = when (currentState) {
+                            is UpdateState.DownloadProgress -> currentState.progress
                             is UpdateState.Downloading -> 0
                             else -> 0
                         },
@@ -132,8 +133,8 @@ class MainActivity : ComponentActivity() {
                                 onSkip = { updateViewModel.dismiss() },
                                 isDownloading = updateState is UpdateState.Downloading ||
                                     updateState is UpdateState.DownloadProgress,
-                                downloadProgress = when (updateState) {
-                                    is UpdateState.DownloadProgress -> updateState.progress / 100f
+                                downloadProgress = when (currentState) {
+                                    is UpdateState.DownloadProgress -> currentState.progress / 100f
                                     else -> 0f
                                 },
                             )

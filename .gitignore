@@ -17,3 +17,5 @@ local.properties
 compile_error.txt
 compile_output.txt
 .zcode
+*.keystore
+*.jks

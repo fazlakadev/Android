@@ -48,7 +48,7 @@ class UpdateChecker @Inject constructor(
             val response = apiService.getLatestAppVersion()
             if (!response.success) return null
 
-            val data = response.data
+            val data = response.data ?: return null
             val remoteVersion = data.version
             val localVersion = getCurrentVersion()
             val forceUpdate = data.forceUpdate
