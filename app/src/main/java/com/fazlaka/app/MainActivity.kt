@@ -89,6 +89,14 @@ class MainActivity : ComponentActivity() {
                 updateViewModel.checkForUpdates()
             }
 
+            LaunchedEffect(pendingNotificationData) {
+                val data = pendingNotificationData
+                if (data != null && data["type"] == "app_update") {
+                    pendingNotificationData = null
+                    updateViewModel.checkForUpdates()
+                }
+            }
+
             val isForceBlocking = updateInfo?.forceUpdate == true &&
                 updateState !is UpdateState.UpToDate &&
                 updateState !is UpdateState.Idle
@@ -161,6 +169,8 @@ class MainActivity : ComponentActivity() {
             intent.getStringExtra("content_id")?.let { put("contentId", it) }
             intent.getStringExtra("conversation_id")?.let { put("conversationId", it) }
             intent.getStringExtra("user_id")?.let { put("userId", it) }
+            intent.getStringExtra("version")?.let { put("version", it) }
+            intent.getStringExtra("downloadUrl")?.let { put("downloadUrl", it) }
         }
     }
 }

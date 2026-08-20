@@ -139,6 +139,23 @@ class NotificationHelper @Inject constructor(
                     )
                 }
             }
+            "app_update" -> {
+                val mainIntent = createDeepLinkIntent(data + ("action" to "update"))
+                val updatePending = PendingIntent.getActivity(
+                    context,
+                    notificationId + 1,
+                    mainIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                )
+                builder
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setAutoCancel(true)
+                    .addAction(
+                        R.mipmap.ic_launcher,
+                        "تحديث",
+                        updatePending,
+                    )
+            }
         }
     }
 
