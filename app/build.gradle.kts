@@ -16,8 +16,8 @@ android {
         applicationId = "com.fazlaka.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 15
-        versionName = "1.6.0"
+        versionCode = 16
+        versionName = "1.6.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -34,7 +34,7 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "API_BASE_URL", "\"https://back-end-hq0is.faable.link/api/v1/\"")
-            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"919871876990-bt6k1athf3faceeake9eu1ii4aqqbq1s.apps.googleusercontent.com\"")
+            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"919871876990-hqb49huhl0gg2osdcg7jv7e39adf9fo1.apps.googleusercontent.com\"")
             buildConfigField("String", "PUSHER_KEY", "\"\"")
             buildConfigField("String", "PUSHER_CLUSTER", "\"eu\"")
         }
@@ -47,7 +47,7 @@ android {
                 "proguard-rules.pro",
             )
             buildConfigField("String", "API_BASE_URL", "\"https://back-end-hq0is.faable.link/api/v1/\"")
-            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"919871876990-bt6k1athf3faceeake9eu1ii4aqqbq1s.apps.googleusercontent.com\"")
+            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"919871876990-hqb49huhl0gg2osdcg7jv7e39adf9fo1.apps.googleusercontent.com\"")
             buildConfigField("String", "PUSHER_KEY", "\"\"")
             buildConfigField("String", "PUSHER_CLUSTER", "\"eu\"")
         }
