@@ -34,6 +34,7 @@ import com.fazlaka.app.ui.screens.episode.EpisodeDetailScreen
 import com.fazlaka.app.ui.screens.episodes.AllEpisodesScreen
 import com.fazlaka.app.ui.screens.friends.FriendsScreen
 import com.fazlaka.app.ui.screens.messages.ConversationScreen
+import com.fazlaka.app.ui.screens.messages.MessagesScreen
 import com.fazlaka.app.ui.screens.notifications.NotificationsScreen
 import com.fazlaka.app.ui.screens.profile.EditProfileScreen
 import com.fazlaka.app.ui.screens.profile.LikesHistoryScreen
@@ -43,6 +44,7 @@ import com.fazlaka.app.ui.screens.profile.ReferralsScreen
 import com.fazlaka.app.ui.screens.profile.UserProfileScreen
 import com.fazlaka.app.ui.screens.profile.ViewHistoryScreen
 import com.fazlaka.app.ui.screens.seasons.SeasonDetailScreen
+import com.fazlaka.app.ui.screens.seasons.SeasonsScreen
 import com.fazlaka.app.ui.screens.security.ActivityLogScreen
 import com.fazlaka.app.ui.screens.security.ChangeEmailScreen
 import com.fazlaka.app.ui.screens.security.LinkedAccountsScreen
@@ -248,6 +250,11 @@ fun FazlakaNavGraph(
         }
 
         // Content details
+        composable(Routes.SEASONS) {
+            SeasonsScreen(
+                onNavigate = { navController.navigate(it) },
+            )
+        }
         composable(Routes.SEASON) {
             SeasonDetailScreen(
                 onBack = { navController.popBackStack() },
@@ -266,6 +273,11 @@ fun FazlakaNavGraph(
         composable(Routes.PLAYLIST) {
             PlaylistDetailScreen(
                 onBack = { navController.popBackStack() },
+                onNavigate = { navController.navigate(it) },
+            )
+        }
+        composable(Routes.MESSAGES) {
+            MessagesScreen(
                 onNavigate = { navController.navigate(it) },
             )
         }
