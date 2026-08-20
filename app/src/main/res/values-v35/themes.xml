@@ -5,11 +5,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLayoutInDisplayCutoutMode">always</item>
-    </style>
-
-    <style name="Theme.Fazlaka.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#FF1A0F2E</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
-        <item name="postSplashScreenTheme">@style/Theme.Fazlaka</item>
+        <item name="android:windowSplashScreenBackground">@color/window_background</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
     </style>
 </resources>

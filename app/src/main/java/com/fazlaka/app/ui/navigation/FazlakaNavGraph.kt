@@ -50,6 +50,7 @@ import com.fazlaka.app.ui.screens.security.ChangeEmailScreen
 import com.fazlaka.app.ui.screens.security.LinkedAccountsScreen
 import com.fazlaka.app.ui.screens.security.SecondaryEmailsScreen
 import com.fazlaka.app.ui.screens.security.SecurityScreen
+import com.fazlaka.app.ui.screens.search.SearchScreen
 import com.fazlaka.app.ui.screens.settings.SettingsScreen
 import com.fazlaka.app.ui.screens.support.SupportScreen
 import com.fazlaka.app.ui.screens.support.SupportTicketScreen
@@ -250,6 +251,11 @@ fun FazlakaNavGraph(
         }
 
         // Content details
+        composable(Routes.SEARCH) {
+            SearchScreen(
+                onNavigate = { navController.navigate(it) },
+            )
+        }
         composable(Routes.SEASONS) {
             SeasonsScreen(
                 onNavigate = { navController.navigate(it) },
