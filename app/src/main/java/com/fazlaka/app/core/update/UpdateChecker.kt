@@ -45,10 +45,7 @@ class UpdateChecker @Inject constructor(
 
     suspend fun checkForUpdate(): UpdateInfo? {
         return try {
-            val response = apiService.getLatestAppVersion()
-            if (!response.success) return null
-
-            val data = response.data ?: return null
+            val data = apiService.getLatestAppVersion()
             val remoteVersion = data.version
             val localVersion = getCurrentVersion()
             val forceUpdate = data.forceUpdate

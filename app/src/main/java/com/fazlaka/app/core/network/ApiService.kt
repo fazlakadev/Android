@@ -1,7 +1,7 @@
 package com.fazlaka.app.core.network
 
 import com.fazlaka.app.core.model.dto.AcceptTermsRequest
-import com.fazlaka.app.core.model.dto.AppVersionResponse
+import com.fazlaka.app.core.model.dto.AppVersionData
 import com.fazlaka.app.core.model.dto.AddGroupMembersRequest
 import com.fazlaka.app.core.model.dto.ApiEnvelope
 import com.fazlaka.app.core.model.dto.AddUserEmailRequest
@@ -684,5 +684,5 @@ interface ApiService {
 
     // ---------------- App Update ----------------
     @GET("app-version/latest")
-    suspend fun getLatestAppVersion(): AppVersionResponse
+    suspend fun getLatestAppVersion(): AppVersionData
 }
