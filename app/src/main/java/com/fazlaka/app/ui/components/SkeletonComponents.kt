@@ -90,8 +90,8 @@ fun ListSkeleton(
     rowCount: Int = 8,
     modifier: Modifier = Modifier,
 ) {
-    LazyColumn(modifier = modifier) {
-        items(rowCount) { index ->
+    Column(modifier = modifier) {
+        repeat(rowCount) { index ->
             StaggeredItem(index = index) {
                 Row(
                     modifier = Modifier
