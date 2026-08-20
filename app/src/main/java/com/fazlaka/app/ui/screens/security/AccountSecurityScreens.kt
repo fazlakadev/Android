@@ -1054,37 +1054,17 @@ private fun OAuthLinkWebView(
         }
     }
 
-    Dialog(onDismissRequest = { onClose(false) }) {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-            color = MaterialTheme.colorScheme.background,
-        ) {
-            Column(
+    AlertDialog(
+        onDismissRequest = { onClose(false) },
+        title = { Text("ربط الحساب") },
+        text = {
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 16.dp),
+                    .fillMaxWidth()
+                    .height(420.dp),
             ) {
-                // Header
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text("ربط الحساب", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                    IconButton(onClick = { onClose(false) }) {
-                        Icon(Icons.Filled.Close, contentDescription = "إغلاق", tint = MaterialTheme.colorScheme.onSurface)
-                    }
-                }
-                androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
-
-                // WebView
                 AndroidView(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    modifier = Modifier.fillMaxSize(),
                     factory = { ctx ->
                         WebView(ctx).apply {
                             settings.javaScriptEnabled = true
@@ -1107,8 +1087,14 @@ private fun OAuthLinkWebView(
                     },
                 )
             }
-        }
-    }
+        },
+        confirmButton = {},
+        dismissButton = {
+            TextButton(onClick = { onClose(false) }) {
+                Text("إغلاق")
+            }
+        },
+    )
 }
 
 // ===========================================================================

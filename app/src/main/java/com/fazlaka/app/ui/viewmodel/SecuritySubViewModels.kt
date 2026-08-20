@@ -16,6 +16,7 @@ import com.fazlaka.app.core.model.dto.UserEmailsDto
 import com.fazlaka.app.core.network.ApiResult
 import com.fazlaka.app.data.repository.AuthRepository
 import com.fazlaka.app.data.repository.ProfileRepository
+import android.util.Log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -238,33 +239,46 @@ class LinkedAccountsViewModel @Inject constructor(
     fun load() {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true, error = null)
-            val status = authRepository.linkStatus()
-            val me = authRepository.me()
-            _state.value = _state.value.copy(
-                loading = false,
-                status = (status as? ApiResult.Success)?.data ?: _state.value.status,
-                user = (me as? ApiResult.Success)?.data ?: _state.value.user,
-                error = when (status) {
-                    is ApiResult.Failure -> status.localized()
-                    is ApiResult.Success -> (me as? ApiResult.Failure)?.localized()
-                },
-            )
+            try {
+                val status = authRepository.linkStatus()
+                val me = authRepository.me()
+                _state.value = _state.value.copy(
+                    loading = false,
+                    status = (status as? ApiResult.Success)?.data ?: _state.value.status,
+                    user = (me as? ApiResult.Success)?.data ?: _state.value.user,
+                    error = when (status) {
+                        is ApiResult.Failure -> status.localized()
+                        is ApiResult.Success -> (me as? ApiResult.Failure)?.localized()
+                    },
+                )
+            } catch (e: Exception) {
+                Log.e("LinkedAccountsVM", "load failed", e)
+                _state.value = _state.value.copy(
+                    loading = false,
+                    error = "تعذر تحميل البيانات — حاول مرة أخرى",
+                )
+            }
         }
     }
 
     fun unlink(provider: String) {
         viewModelScope.launch {
             _state.value = _state.value.copy(busy = true, error = null)
-            when (val r = authRepository.unlinkProvider(provider)) {
-                is ApiResult.Success -> {
-                    _state.value = _state.value.copy(
-                        busy = false,
-                        status = r.data,
-                        message = "تم فك الربط",
-                    )
+            try {
+                when (val r = authRepository.unlinkProvider(provider)) {
+                    is ApiResult.Success -> {
+                        _state.value = _state.value.copy(
+                            busy = false,
+                            status = r.data,
+                            message = "تم فك الربط",
+                        )
+                    }
+                    is ApiResult.Failure -> _state.value =
+                        _state.value.copy(busy = false, error = r.localized())
                 }
-                is ApiResult.Failure -> _state.value =
-                    _state.value.copy(busy = false, error = r.localized())
+            } catch (e: Exception) {
+                Log.e("LinkedAccountsVM", "unlink failed", e)
+                _state.value = _state.value.copy(busy = false, error = "خطأ غير متوقع")
             }
         }
     }
@@ -272,13 +286,18 @@ class LinkedAccountsViewModel @Inject constructor(
     fun removePhone() {
         viewModelScope.launch {
             _state.value = _state.value.copy(busy = true, error = null)
-            when (val r = authRepository.removePhone()) {
-                is ApiResult.Success -> {
-                    _state.value = _state.value.copy(busy = false, message = "تم فك ربط الهاتف")
-                    load()
+            try {
+                when (val r = authRepository.removePhone()) {
+                    is ApiResult.Success -> {
+                        _state.value = _state.value.copy(busy = false, message = "تم فك ربط الهاتف")
+                        load()
+                    }
+                    is ApiResult.Failure -> _state.value =
+                        _state.value.copy(busy = false, error = r.localized())
                 }
-                is ApiResult.Failure -> _state.value =
-                    _state.value.copy(busy = false, error = r.localized())
+            } catch (e: Exception) {
+                Log.e("LinkedAccountsVM", "removePhone failed", e)
+                _state.value = _state.value.copy(busy = false, error = "خطأ غير متوقع")
             }
         }
     }
@@ -287,8 +306,13 @@ class LinkedAccountsViewModel @Inject constructor(
     fun startLink(provider: String, password: String?) {
         viewModelScope.launch {
             _state.value = _state.value.copy(busy = true, error = null)
-            val (result, cookie) = authRepository.startOauthLink(provider, password)
-            applyLinkResult(provider, result, cookie)
+            try {
+                val (result, cookie) = authRepository.startOauthLink(provider, password)
+                applyLinkResult(provider, result, cookie)
+            } catch (e: Exception) {
+                Log.e("LinkedAccountsVM", "startLink failed", e)
+                _state.value = _state.value.copy(busy = false, error = "خطأ غير متوقع أثناء الربط")
+            }
         }
     }
 
@@ -296,8 +320,13 @@ class LinkedAccountsViewModel @Inject constructor(
     fun confirmLinkOtp(provider: String, otp: String) {
         viewModelScope.launch {
             _state.value = _state.value.copy(busy = true, error = null)
-            val (result, cookie) = authRepository.confirmOauthLinkOtp(provider, otp)
-            applyLinkResult(provider, result, cookie)
+            try {
+                val (result, cookie) = authRepository.confirmOauthLinkOtp(provider, otp)
+                applyLinkResult(provider, result, cookie)
+            } catch (e: Exception) {
+                Log.e("LinkedAccountsVM", "confirmLinkOtp failed", e)
+                _state.value = _state.value.copy(busy = false, error = "خطأ غير متوقع أثناء التأكيد")
+            }
         }
     }
 

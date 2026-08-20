@@ -101,19 +101,23 @@ class UpdateDownloadService : Service() {
         super.onDestroy()
     }
 
+    private fun downloadClient(): OkHttpClient = OkHttpClient.Builder()
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(120, TimeUnit.SECONDS)
+        .followRedirects(true)
+        .followSslRedirects(true)
+        .build()
+
     private suspend fun downloadApk(url: String): File? = withContext(Dispatchers.IO) {
         Log.d("UpdateDownloadService", "Starting download from: $url")
         try {
             cleanupOldApks()
             val request = Request.Builder().url(url).build()
-            val response = okHttpClient.newBuilder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .followRedirects(true)
-                .followSslRedirects(true)
-                .build()
+            Log.d("UpdateDownloadService", "Request built, executing with clean client (no interceptors)")
+            val response = downloadClient()
                 .newCall(request)
                 .execute()
+            Log.d("UpdateDownloadService", "Response code: ${response.code}, message: ${response.message}")
 
             if (!response.isSuccessful) {
                 val errorMsg = "Server error: ${response.code} ${response.message}"
