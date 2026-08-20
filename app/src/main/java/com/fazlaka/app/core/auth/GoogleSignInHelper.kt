@@ -7,7 +7,6 @@ import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import androidx.credentials.exceptions.GetCredentialException
 import com.fazlaka.app.BuildConfig
-import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -31,26 +30,14 @@ class GoogleSignInHelper @Inject constructor(
             throw GoogleSignInException("Google Sign-In is not configured. Please contact support.")
         }
 
-        try {
-            getGoogleIdToken(filterByAuthorizedAccounts = true, serverClientId)
-        } catch (_: Exception) {
-            getGoogleIdToken(filterByAuthorizedAccounts = false, serverClientId)
-        }
+        getGoogleIdToken(serverClientId)
     }
 
     private suspend fun getGoogleIdToken(
-        filterByAuthorizedAccounts: Boolean,
         serverClientId: String,
     ): String {
-        val option = if (filterByAuthorizedAccounts) {
-            GetGoogleIdOption.Builder()
-                .setFilterByAuthorizedAccounts(true)
-                .setServerClientId(serverClientId)
-                .build()
-        } else {
-            GetSignInWithGoogleOption.Builder(serverClientId)
-                .build()
-        }
+        val option = GetSignInWithGoogleOption.Builder(serverClientId)
+            .build()
 
         val request = GetCredentialRequest.Builder()
             .addCredentialOption(option)

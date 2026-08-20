@@ -57,7 +57,7 @@ fun OnboardingScreen(
             Spacer(Modifier.weight(1f))
             SocialAuthButton(
                 provider = SocialProvider.Google,
-                onClick = { onNavigate(Routes.oauth("google")) },
+                onClick = { onNavigate(Routes.LOGIN) },
             )
             Spacer(Modifier.height(10.dp))
             SocialAuthButton(

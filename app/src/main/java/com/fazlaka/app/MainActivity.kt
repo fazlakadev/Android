@@ -117,11 +117,11 @@ class MainActivity : ComponentActivity() {
                         onDownload = { updateViewModel.downloadAndInstall() },
                     )
                 } else {
-                    val startDestination = remember(sessionState.isLoggedIn, sessionState.onboarded) {
-                        when {
-                            sessionState.isLoggedIn -> com.fazlaka.app.ui.navigation.Routes.MAIN
-                            sessionState.onboarded -> com.fazlaka.app.ui.navigation.Routes.LOGIN
-                            else -> com.fazlaka.app.ui.navigation.Routes.ONBOARDING
+                    val startDestination = remember(sessionState.isLoggedIn) {
+                        if (sessionState.isLoggedIn) {
+                            com.fazlaka.app.ui.navigation.Routes.MAIN
+                        } else {
+                            com.fazlaka.app.ui.navigation.Routes.LOGIN
                         }
                     }
                     FazlakaNavGraph(
