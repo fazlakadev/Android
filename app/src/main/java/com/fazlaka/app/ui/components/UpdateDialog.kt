@@ -39,6 +39,8 @@ fun UpdateDialog(
     onSkip: () -> Unit,
     isDownloading: Boolean = false,
     downloadProgress: Float = 0f,
+    errorMessage: String? = null,
+    onErrorDismiss: () -> Unit = {},
 ) {
     val mandatory = updateInfo.forceUpdate
 
@@ -151,6 +153,23 @@ fun UpdateDialog(
                             trackColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                         )
                         Spacer(Modifier.height(4.dp))
+                    }
+                }
+
+                if (errorMessage != null) {
+                    Spacer(Modifier.height(8.dp))
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = MaterialTheme.colorScheme.errorContainer,
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(
+                            text = errorMessage,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onError,
+                            modifier = Modifier.padding(10.dp),
+                            textAlign = TextAlign.Center,
+                        )
                     }
                 }
             }

@@ -147,6 +147,16 @@ class MainActivity : ComponentActivity() {
                                 },
                             )
                         }
+                        if (currentState is UpdateState.Error) {
+                            UpdateDialog(
+                                updateInfo = updateInfo,
+                                currentVersion = updateViewModel.currentVersion,
+                                onDownload = { updateViewModel.downloadAndInstall() },
+                                onDismiss = { updateViewModel.dismiss() },
+                                onSkip = { updateViewModel.dismiss() },
+                                errorMessage = currentState.message,
+                            )
+                        }
                     }
                 }
             }
