@@ -1,4 +1,6 @@
 ﻿import '../../core/i18n/app_i18n.dart';
+import '../../core/push/push_service.dart';
+import '../../core/update/update_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,6 +15,7 @@ import '../player/audio_player_service.dart';
 import '../player/mini_player_bar.dart';
 import '../search/search_screen.dart';
 import '../seasons/seasons_tab.dart';
+import '../update/update_dialog.dart';
 import 'app_drawer.dart';
 
 class HomeShell extends ConsumerStatefulWidget {
@@ -60,6 +63,27 @@ class _HomeShellState extends ConsumerState<HomeShell>
     with SingleTickerProviderStateMixin {
   late final TabController _tabs = TabController(length: 4, vsync: this);
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _bootstrapped = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _bootstrap());
+  }
+
+  /// Push notifications + silent update check, once per app session.
+  Future<void> _bootstrap() async {
+    if (_bootstrapped) return;
+    _bootstrapped = true;
+    try {
+      await ref.read(pushInitProvider.notifier).init();
+      await ref.read(pushInitProvider.notifier).registerAfterLogin();
+      final hasUpdate = await ref.read(updateProvider.notifier).check();
+      if (hasUpdate && mounted) {
+        await maybeShowUpdateDialog(context, ref);
+      }
+    } catch (_) {}
+  }
 
   @override
   void dispose() {

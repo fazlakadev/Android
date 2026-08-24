@@ -1,7 +1,15 @@
 class AppConfig {
   AppConfig._();
 
-  static const appVersion = '1.0.0';
+  /// Resolved at bootstrap from pubspec (PackageInfo). Fallback keeps the
+  /// value usable before main() finishes.
+  static String appVersion = '1.0.0';
+  static bool versionResolved = false;
+
+  static void resolveVersion(String v) {
+    appVersion = v;
+    versionResolved = true;
+  }
 
   /// Backend base URL (cloud-hosted).
   ///

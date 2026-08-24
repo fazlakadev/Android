@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../core/api/api_client.dart';
+import '../../core/config.dart';
 import '../../core/i18n/app_i18n.dart';
+import '../../core/update/update_service.dart';
 import '../content/models.dart';
 import '../content/providers.dart';
+import '../update/update_dialog.dart';
 
 /// System-level settings: appearance, language and notification preferences.
 /// Deliberately separate from [AccountSettingsScreen] which handles
@@ -20,11 +24,34 @@ class SystemSettingsScreen extends ConsumerStatefulWidget {
 class _SystemSettingsScreenState extends ConsumerState<SystemSettingsScreen> {
   Preferences? _prefs;
   bool _prefsLoading = true;
+  String _version = AppConfig.appVersion;
+  bool _checking = false;
 
   @override
   void initState() {
     super.initState();
     _loadPrefs();
+    _loadVersion();
+  }
+
+  Future<void> _loadVersion() async {
+    try {
+      final info = await PackageInfo.fromPlatform();
+      if (mounted) setState(() => _version = info.version);
+    } catch (_) {}
+  }
+
+  Future<void> _checkForUpdates() async {
+    if (_checking) return;
+    setState(() => _checking = true);
+    final hasUpdate = await ref.read(updateProvider.notifier).check();
+    if (!mounted) return;
+    setState(() => _checking = false);
+    if (hasUpdate) {
+      await maybeShowUpdateDialog(context, ref);
+    } else {
+      _snack(ref.read(sProvider).upToDate);
+    }
   }
 
   Future<void> _loadPrefs() async {
@@ -167,6 +194,56 @@ class _SystemSettingsScreenState extends ConsumerState<SystemSettingsScreen> {
                                     ))
                                 .toList(),
                           ),
+                  ),
+
+                  // ---------- App & updates ----------
+                  _SettingsSectionHeader(theme: theme,
+                      icon: Icons.smartphone_rounded, title: s.appInfo),
+                  Card(
+                    child: Column(
+                        children: [
+                          ListTile(
+                            leading:
+                                const Icon(Icons.verified_outlined),
+                            title: Text(s.currentVersion),
+                            subtitle: Text('v$_version'),
+                          ),
+                          const Divider(height: 1),
+                          Consumer(builder: (context, ref, _) {
+                            final st = ref.watch(updateProvider);
+                            final subtitle = switch (st.phase) {
+                              UpdatePhase.checking => '…',
+                              UpdatePhase.downloading =>
+                                '${(st.progress * 100).toStringAsFixed(0)}%',
+                              UpdatePhase.available => st.info?.tagName ?? '',
+                              UpdatePhase.upToDate => s.upToDate,
+                              _ => null,
+                            };
+                            return ListTile(
+                              leading: Icon(
+                                Icons.system_update_alt_rounded,
+                                color: st.phase == UpdatePhase.available
+                                    ? theme.colorScheme.primary
+                                    : null,
+                              ),
+                              title: Text(s.checkUpdates),
+                              subtitle: subtitle == null
+                                  ? null
+                                  : Text(subtitle),
+                              trailing: _checking ||
+                                      st.phase == UpdatePhase.checking
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                          strokeWidth: 2),
+                                    )
+                                  : const Icon(Icons.chevron_right),
+                              onTap: _checkForUpdates,
+                            );
+                          }),
+                        ],
+                      ),
                   ),
                 ],
               ),

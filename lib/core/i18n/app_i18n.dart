@@ -47,6 +47,20 @@ abstract class S {
   String get cancel;
   String get signOutAction;
 
+  // Updates
+  String get appInfo;
+  String get currentVersion;
+  String get checkUpdates;
+  String get upToDate;
+  String get updateAvailableTitle;
+  String get whatsNew;
+  String get updateNow;
+  String get later;
+  String get downloadingUpdate;
+  String get downloadDone;
+  String get installNow;
+  String get updateCheckFailed;
+
   // Auth
   String get welcomeTitle;
   String get continueWithGoogle;
@@ -168,6 +182,31 @@ class SAr extends S {
   final String cancel = 'إلغاء';
   @override
   final String signOutAction = 'خروج';
+
+  @override
+  final String appInfo = 'التطبيق';
+  @override
+  final String currentVersion = 'الإصدار الحالي';
+  @override
+  final String checkUpdates = 'فحص التحديثات';
+  @override
+  final String upToDate = 'أنت تستخدم أحدث إصدار';
+  @override
+  final String updateAvailableTitle = 'تحديث جديد متاح!';
+  @override
+  final String whatsNew = 'ما الجديد';
+  @override
+  final String updateNow = 'تحديث الآن';
+  @override
+  final String later = 'لاحقًا';
+  @override
+  final String downloadingUpdate = 'جاري تنزيل التحديث…';
+  @override
+  final String downloadDone = 'تم التنزيل، جاهز للتثبيت';
+  @override
+  final String installNow = 'تثبيت الآن';
+  @override
+  final String updateCheckFailed = 'تعذر التحقق من التحديثات';
   @override
   final String welcomeTitle = 'مرحبًا بك في فضلكة';
   @override
@@ -323,6 +362,31 @@ class SEn extends S {
   final String cancel = 'Cancel';
   @override
   final String signOutAction = 'Sign out';
+
+  @override
+  final String appInfo = 'App';
+  @override
+  final String currentVersion = 'Current version';
+  @override
+  final String checkUpdates = 'Check for updates';
+  @override
+  final String upToDate = "You're on the latest version";
+  @override
+  final String updateAvailableTitle = 'Update available!';
+  @override
+  final String whatsNew = "What's new";
+  @override
+  final String updateNow = 'Update now';
+  @override
+  final String later = 'Later';
+  @override
+  final String downloadingUpdate = 'Downloading update…';
+  @override
+  final String downloadDone = 'Downloaded, ready to install';
+  @override
+  final String installNow = 'Install now';
+  @override
+  final String updateCheckFailed = 'Could not check for updates';
   @override
   final String welcomeTitle = 'Welcome to Fazlaka';
   @override
@@ -479,6 +543,31 @@ class SFr extends S {
   final String cancel = 'Annuler';
   @override
   final String signOutAction = 'Déconnexion';
+
+  @override
+  final String appInfo = 'Application';
+  @override
+  final String currentVersion = 'Version actuelle';
+  @override
+  final String checkUpdates = 'Vérifier les mises à jour';
+  @override
+  final String upToDate = 'Vous utilisez la dernière version';
+  @override
+  final String updateAvailableTitle = 'Mise à jour disponible !';
+  @override
+  final String whatsNew = 'Nouveautés';
+  @override
+  final String updateNow = 'Mettre à jour';
+  @override
+  final String later = 'Plus tard';
+  @override
+  final String downloadingUpdate = 'Téléchargement de la mise à jour…';
+  @override
+  final String downloadDone = 'Téléchargé, prêt à installer';
+  @override
+  final String installNow = 'Installer';
+  @override
+  final String updateCheckFailed = 'Impossible de vérifier les mises à jour';
   @override
   final String welcomeTitle = 'Bienvenue chez Fazlaka';
   @override
