@@ -61,6 +61,22 @@ abstract class S {
   String get installNow;
   String get updateCheckFailed;
 
+  // Support & chat
+  String get supportTitle;
+  String get newTicketTitle;
+  String get ticketSubjectLabel;
+  String get ticketMessageLabel;
+  String get sendLabel;
+  String get ticketSentToast;
+  String get newTicketButton;
+  String get noTicketsYet;
+  String get supportTeamLabel;
+  String get chatMessageHint;
+  String get attachPhoto;
+  String get attachVideo;
+  String get attachAudio;
+  String get attachmentTooBig;
+
   // Auth
   String get welcomeTitle;
   String get continueWithGoogle;
@@ -207,6 +223,35 @@ class SAr extends S {
   final String installNow = 'تثبيت الآن';
   @override
   final String updateCheckFailed = 'تعذر التحقق من التحديثات';
+
+  @override
+  final String supportTitle = 'الدعم الفني';
+  @override
+  final String newTicketTitle = 'تذكرة دعم جديدة';
+  @override
+  final String ticketSubjectLabel = 'الموضوع';
+  @override
+  final String ticketMessageLabel = 'اشرح مشكلتك…';
+  @override
+  final String sendLabel = 'إرسال';
+  @override
+  final String ticketSentToast = 'تم إرسال التذكرة، سنرد عليك قريبًا';
+  @override
+  final String newTicketButton = 'تذكرة جديدة';
+  @override
+  final String noTicketsYet = 'لا توجد تذاكر بعد';
+  @override
+  final String supportTeamLabel = 'فريق الدعم';
+  @override
+  final String chatMessageHint = 'رسالة…';
+  @override
+  final String attachPhoto = 'صورة';
+  @override
+  final String attachVideo = 'فيديو';
+  @override
+  final String attachAudio = 'ملف صوتي';
+  @override
+  final String attachmentTooBig = 'حجم الملف أكبر من الحد المسموح (10 ميجابايت)';
   @override
   final String welcomeTitle = 'مرحبًا بك في فضلكة';
   @override
@@ -387,6 +432,35 @@ class SEn extends S {
   final String installNow = 'Install now';
   @override
   final String updateCheckFailed = 'Could not check for updates';
+
+  @override
+  final String supportTitle = 'Support';
+  @override
+  final String newTicketTitle = 'New support ticket';
+  @override
+  final String ticketSubjectLabel = 'Subject';
+  @override
+  final String ticketMessageLabel = 'Describe your issue…';
+  @override
+  final String sendLabel = 'Send';
+  @override
+  final String ticketSentToast = 'Ticket sent, we will reply soon';
+  @override
+  final String newTicketButton = 'New ticket';
+  @override
+  final String noTicketsYet = 'No tickets yet';
+  @override
+  final String supportTeamLabel = 'Support team';
+  @override
+  final String chatMessageHint = 'Message…';
+  @override
+  final String attachPhoto = 'Photo';
+  @override
+  final String attachVideo = 'Video';
+  @override
+  final String attachAudio = 'Audio file';
+  @override
+  final String attachmentTooBig = 'File exceeds the 10 MB limit';
   @override
   final String welcomeTitle = 'Welcome to Fazlaka';
   @override
@@ -568,6 +642,35 @@ class SFr extends S {
   final String installNow = 'Installer';
   @override
   final String updateCheckFailed = 'Impossible de vérifier les mises à jour';
+
+  @override
+  final String supportTitle = 'Assistance';
+  @override
+  final String newTicketTitle = 'Nouveau ticket';
+  @override
+  final String ticketSubjectLabel = 'Sujet';
+  @override
+  final String ticketMessageLabel = 'Décrivez votre problème…';
+  @override
+  final String sendLabel = 'Envoyer';
+  @override
+  final String ticketSentToast = 'Ticket envoyé, nous répondrons bientôt';
+  @override
+  final String newTicketButton = 'Nouveau ticket';
+  @override
+  final String noTicketsYet = 'Aucun ticket pour le moment';
+  @override
+  final String supportTeamLabel = "Équipe d'assistance";
+  @override
+  final String chatMessageHint = 'Message…';
+  @override
+  final String attachPhoto = 'Photo';
+  @override
+  final String attachVideo = 'Vidéo';
+  @override
+  final String attachAudio = 'Fichier audio';
+  @override
+  final String attachmentTooBig = 'Le fichier dépasse la limite de 10 Mo';
   @override
   final String welcomeTitle = 'Bienvenue chez Fazlaka';
   @override

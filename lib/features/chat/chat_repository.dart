@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 import '../../../core/api/api_client.dart';
 import '../content/models.dart';
 
@@ -74,6 +76,38 @@ class ChatRepository {
   Future<void> send(String conversationId, String body) =>
       _client.postJson('/messages/conversations/$conversationId/messages',
           body: {'type': 'text', 'body': body});
+
+  /// Uploads [bytes] to `/upload/chat?kind=` then sends a media message.
+  Future<void> sendAttachment(
+    String conversationId, {
+    required String kind,
+    required String fileName,
+    required List<int> bytes,
+    int? durationSec,
+  }) async {
+    final uploaded = await _client.postMultipart(
+      '/upload/chat',
+      query: {'kind': kind},
+      file: MultipartFile.fromBytes(bytes, filename: fileName),
+    ) as Map<String, dynamic>? ??
+        <String, dynamic>{};
+    final url = (uploaded['url'] ?? '').toString();
+    if (url.isEmpty) {
+      throw Exception('Upload failed');
+    }
+    await _client.postJson(
+      '/messages/conversations/$conversationId/messages',
+      body: {
+        'type': kind,
+        'attachmentUrl': url,
+        if (uploaded['mime'] != null) 'attachmentMime': uploaded['mime'],
+        'attachmentName': fileName,
+        if (uploaded['size'] is num)
+          'attachmentSize': (uploaded['size'] as num).toInt(),
+        'durationSec': ?durationSec,
+      },
+    );
+  }
 
   Future<void> markRead(String conversationId) =>
       _client.patchJson('/messages/conversations/$conversationId/read');

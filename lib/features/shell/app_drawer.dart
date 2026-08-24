@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../../core/config.dart';
 import '../../core/i18n/app_i18n.dart';
 import '../../core/widgets/transitions.dart';
 import '../auth/controllers/auth_controller.dart';
@@ -184,7 +184,7 @@ class AppDrawer extends ConsumerWidget {
               padding: const EdgeInsets.only(bottom: 14, top: 2),
               child: Center(
                 child: Text(
-                  'Fazlaka v1.0.0',
+                  'Fazlaka v${AppConfig.appVersion}',
                   style: theme.textTheme.bodySmall
                       ?.copyWith(color: theme.colorScheme.outline),
                 ),

@@ -155,6 +155,25 @@ class ApiClient {
     return _unwrap(res.data);
   }
 
+  Future<dynamic> postMultipart(
+    String path, {
+    Map<String, dynamic>? fields,
+    Map<String, String>? query,
+    required MultipartFile file,
+    bool authenticated = true,
+  }) async {
+    final form = FormData.fromMap(<String, dynamic>{...?fields, 'file': file});
+    final res = await _send<dynamic>(
+      () => _dio.post<dynamic>(
+        path,
+        data: form,
+        queryParameters: query,
+        options: Options(extra: {'auth': authenticated}),
+      ),
+    );
+    return res.data;
+  }
+
   Map<String, dynamic> _unwrap(Map<String, dynamic>? body) {
     final inner = body?['data'];
     if (inner is Map<String, dynamic>) return inner;

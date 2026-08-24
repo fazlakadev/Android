@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/i18n/app_i18n.dart';
 import '../content/providers.dart';
+import 'ticket_detail_screen.dart';
 
 class SupportScreen extends ConsumerStatefulWidget {
   const SupportScreen({super.key});
@@ -34,6 +36,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
   }
 
   Future<void> _newTicket() async {
+    final s = ref.read(sProvider);
     final subject = TextEditingController();
     final message = TextEditingController();
     final ok = await showModalBottomSheet<bool>(
@@ -55,7 +58,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text('تذكرة دعم جديدة',
+                Text(s.newTicketTitle,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
@@ -63,19 +66,19 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: subject,
-                  decoration: const InputDecoration(
-                    labelText: 'الموضوع',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: s.ticketSubjectLabel,
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: message,
                   maxLines: 4,
-                  decoration: const InputDecoration(
-                    labelText: 'اشرح مشكلتك…',
+                  decoration: InputDecoration(
+                    labelText: s.ticketMessageLabel,
                     alignLabelWithHint: true,
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -87,7 +90,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
                     }
                     Navigator.pop(context, true);
                   },
-                  child: const Text('إرسال'),
+                  child: Text(s.sendLabel),
                 ),
               ],
             ),
@@ -103,7 +106,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
           );
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تم إرسال التذكرة، سنرد عليك قريبًا')),
+        SnackBar(content: Text(ref.read(sProvider).ticketSentToast)),
       );
       _load();
     } catch (e) {
@@ -117,12 +120,13 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final s = ref.watch(sProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('الدعم الفني')),
+      appBar: AppBar(title: Text(s.supportTitle)),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _newTicket,
         icon: const Icon(Icons.add_rounded),
-        label: const Text('تذكرة جديدة'),
+        label: Text(s.newTicketButton),
       ),
       body: _busy
           ? const Center(child: CircularProgressIndicator())
@@ -134,7 +138,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
                       Icon(Icons.support_agent_rounded,
                           size: 56, color: theme.colorScheme.outlineVariant),
                       const SizedBox(height: 10),
-                      Text('لا توجد تذاكر بعد',
+                      Text(s.noTicketsYet,
                           style: TextStyle(color: theme.colorScheme.outline)),
                     ],
                   ),
@@ -156,6 +160,14 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
                           side: BorderSide(color: theme.colorScheme.outlineVariant),
                         ),
                         child: ListTile(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (_) => TicketDetailScreen(
+                                ticketId: (t['id'] ?? '').toString(),
+                              ),
+                            ),
+                          ),
                           leading: Icon(
                             switch (status) {
                               'OPEN' || 'IN_PROGRESS' => Icons.schedule_rounded,

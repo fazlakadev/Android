@@ -379,6 +379,11 @@ class ChatMessage {
     required this.sender,
     required this.body,
     this.type = 'text',
+    this.attachmentUrl,
+    this.attachmentMime,
+    this.attachmentName,
+    this.attachmentSize,
+    this.durationSec,
     this.createdAt,
     this.readAt,
   });
@@ -388,6 +393,11 @@ class ChatMessage {
   final CommentAuthor sender;
   final String body;
   final String type;
+  final String? attachmentUrl;
+  final String? attachmentMime;
+  final String? attachmentName;
+  final int? attachmentSize;
+  final int? durationSec;
   final DateTime? createdAt;
   final DateTime? readAt;
 
@@ -399,6 +409,15 @@ class ChatMessage {
             CommentAuthor.fromJson(j['sender'] as Map<String, dynamic>?),
         body: (j['body'] ?? '').toString(),
         type: (j['type'] ?? 'text').toString(),
+        attachmentUrl: j['attachmentUrl']?.toString(),
+        attachmentMime: j['attachmentMime']?.toString(),
+        attachmentName: j['attachmentName']?.toString(),
+        attachmentSize: (j['attachmentSize'] is num)
+            ? (j['attachmentSize'] as num).toInt()
+            : null,
+        durationSec: (j['durationSec'] is num)
+            ? (j['durationSec'] as num).toInt()
+            : null,
         createdAt: _date(j['createdAt']),
         readAt: _date(j['readAt']),
       );
