@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "466516104707",
+    "project_id": "fazlaka-fa57b",
+    "storage_bucket": "fazlaka-fa57b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466516104707:android:0be33cb385a0c1680be036",
+        "android_client_info": {
+          "package_name": "com.fazlaka.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSjTuTzGURli6TwYd1juVWeXKWxaiLTtc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
