@@ -46,6 +46,9 @@ class ApiClient {
 
   Dio get raw => _dio;
 
+  /// Raw bearer token for third-party clients (e.g. Pusher auth endpoint).
+  String? get accessToken => _accessToken;
+
   /// Current authenticated user id, decoded from the access token's
   /// `sub` claim (no signature check; identity is server-verified).
   String? get userId {

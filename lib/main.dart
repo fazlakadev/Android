@@ -6,6 +6,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import 'core/config.dart';
 import 'core/i18n/app_i18n.dart';
+import 'core/navigation.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/screens/splash_screen.dart';
 
@@ -31,6 +32,7 @@ class FazlakaApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Fazlaka',
       debugShowCheckedModeBanner: false,
+      navigatorKey: appNavigatorKey,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeMode,

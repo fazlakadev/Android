@@ -2,10 +2,18 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../features/articles/article_detail_screen.dart';
+import '../../features/chat/chat_screen.dart';
+import '../../features/episodes/episode_detail_screen.dart';
+import '../../features/seasons/season_detail_screen.dart';
+import '../navigation.dart';
+
 import '../../features/auth/controllers/auth_controller.dart';
+import '../../features/content/providers.dart';
 import '../config.dart';
 import '../update/update_service.dart';
 
@@ -113,9 +121,68 @@ class PushController extends Notifier<bool> {
   }
 
   void _handleData(Map<String, dynamic> data) {
-    if (data['type'] == 'update') {
-      ref.read(updateProvider.notifier).check(silent: true);
+    switch (data['type']?.toString()) {
+      case 'update':
+        ref.read(updateProvider.notifier).check(silent: true);
+      case 'chat':
+        final conversationId = (data['conversationId'] ?? '').toString();
+        if (conversationId.isNotEmpty) _openChat(conversationId);
+      case 'content':
+        _openContent(
+          (data['kind'] ?? '').toString(),
+          (data['id'] ?? '').toString(),
+        );
     }
+  }
+
+  /// Debounce: foreground onMessage + tap can fire for the same payload.
+  final Map<String, DateTime> _lastHandled = {};
+
+  bool _debounced(String key) {
+    final now = DateTime.now();
+    final last = _lastHandled[key];
+    _lastHandled[key] = now;
+    return last != null && now.difference(last).inSeconds < 3;
+  }
+
+  Future<void> _openChat(String conversationId) async {
+    if (_debounced('chat:$conversationId')) return;
+    final nav = appNavigatorKey.currentState;
+    if (nav == null) return;
+    String title = '';
+    try {
+      final detail =
+          await ref.read(chatRepositoryProvider).detail(conversationId);
+      title = detail.title;
+    } catch (_) {}
+    nav.push(MaterialPageRoute<void>(
+      builder: (_) =>
+          ChatScreen(conversationId: conversationId, title: title),
+    ));
+  }
+
+  Future<void> _openContent(String kind, String id) async {
+    if (id.isEmpty || _debounced('content:$id')) return;
+    final nav = appNavigatorKey.currentState;
+    if (nav == null) return;
+    try {
+      switch (kind) {
+        case 'episode':
+          nav.push(MaterialPageRoute<void>(
+            builder: (_) => EpisodeDetailScreen(episodeId: id),
+          ));
+        case 'article':
+          nav.push(MaterialPageRoute<void>(
+            builder: (_) => ArticleDetailScreen(slugOrId: id),
+          ));
+        case 'season':
+          final season =
+              await ref.read(contentRepositoryProvider).seasonDetail(id);
+          nav.push(MaterialPageRoute<void>(
+            builder: (_) => SeasonDetailScreen(season: season),
+          ));
+      }
+    } catch (_) {}
   }
 
   Future<void> _registerToken(String token) async {

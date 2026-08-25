@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/i18n/app_i18n.dart';
+import '../../core/realtime/realtime_service.dart';
 import '../content/models.dart';
 import '../content/providers.dart';
 import 'chat_screen.dart';
@@ -17,6 +19,7 @@ class ChatsScreen extends ConsumerStatefulWidget {
 class _ChatsScreenState extends ConsumerState<ChatsScreen> {
   List<ConversationItem>? _items;
   Timer? _poll;
+  StreamSubscription<RealtimeEvent>? _rtSub;
 
   @override
   void initState() {
@@ -24,12 +27,33 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
     _load();
     // Light polling keeps unread counts fresh while the list is open.
     _poll = Timer.periodic(const Duration(seconds: 6), (_) => _load(silent: true));
+    // Instant refresh on live messages.
+    _rtSub =
+        ref.read(realtimeProvider.notifier).events.listen((e) {
+      if (e.event == 'message:new') _load(silent: true);
+    });
   }
 
   @override
   void dispose() {
     _poll?.cancel();
+    _rtSub?.cancel();
     super.dispose();
+  }
+
+  String _preview(ConversationItem c) {
+    final s = ref.read(sProvider);
+    final body = c.lastMessageBody?.trim() ?? '';
+    switch (c.lastMessageType) {
+      case 'image':
+        return body.isNotEmpty ? body : s.attachPhoto;
+      case 'video':
+        return body.isNotEmpty ? body : s.attachVideo;
+      case 'audio':
+        return body.isNotEmpty ? body : s.attachAudio;
+      default:
+        return body.isNotEmpty ? body : '…';
+    }
   }
 
   Future<void> _load({bool silent = false}) async {
@@ -112,7 +136,7 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
                             style: const TextStyle(fontWeight: FontWeight.w700),
                           ),
                           subtitle: Text(
-                            c.lastMessageBody ?? 'Say hi 👋',
+                            _preview(c),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),

@@ -33,4 +33,8 @@ class AppConfig {
     defaultValue:
         '919871876990-hqb49huhl0gg2osdcg7jv7e39adf9fo1.apps.googleusercontent.com',
   );
+
+  /// Pusher realtime (public values only — auth happens server-side).
+  static const pusherKey = 'dc5b0ea53cc81538045b';
+  static const pusherCluster = 'eu';
 }

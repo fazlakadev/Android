@@ -6,10 +6,13 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:record/record.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../core/i18n/app_i18n.dart';
+import '../../core/realtime/realtime_service.dart';
 import '../auth/controllers/auth_controller.dart';
 import '../content/models.dart';
 import '../content/providers.dart';
@@ -33,12 +36,17 @@ class ChatScreen extends ConsumerStatefulWidget {
 class _ChatScreenState extends ConsumerState<ChatScreen> {
   final _input = TextEditingController();
   final _scroll = ScrollController();
+  final _recorder = AudioRecorder();
   List<ChatMessage> _messages = [];
   bool _loading = true;
   bool _sending = false;
   bool _uploading = false;
+  bool _recording = false;
+  int _recSecs = 0;
   String? _error;
   Timer? _poll;
+  Timer? _recTimer;
+  StreamSubscription<RealtimeEvent>? _rtSub;
   late String _myId;
 
   @override
@@ -49,14 +57,35 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     // Poll for new messages while the chat is open (realtime socket upgrade
     // can come later; polling keeps this dependency-free).
     _poll = Timer.periodic(const Duration(seconds: 3), (_) => _pollOnce());
+    // Live delivery via Pusher — appends instantly when connected.
+    _rtSub =
+        ref.read(realtimeProvider.notifier).events.listen(_onRealtimeMessage);
   }
 
   @override
   void dispose() {
     _poll?.cancel();
+    _recTimer?.cancel();
+    _rtSub?.cancel();
+    _recorder.dispose();
     _input.dispose();
     _scroll.dispose();
     super.dispose();
+  }
+
+  void _onRealtimeMessage(RealtimeEvent event) {
+    if (event.event != 'message:new' || !mounted) return;
+    final conversationId =
+        (event.data['conversationId'] ?? '').toString();
+    if (conversationId != widget.conversationId) return;
+    final raw = event.data['message'];
+    if (raw is! Map) return;
+    final message =
+        ChatMessage.fromJson(Map<String, dynamic>.from(raw));
+    if (_messages.any((m) => m.id == message.id)) return;
+    setState(() => _messages = [..._messages, message]);
+    _jumpToBottom();
+    _markRead();
   }
 
   Future<void> _refresh() async {
@@ -245,55 +274,93 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       top: false,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(12, 4, 12, 8),
-                        child: Row(
-                          children: [
-                            IconButton.filledTonal(
-                              onPressed: _uploading ? null : _openAttachSheet,
-                              icon: _uploading
-                                  ? const SizedBox(
-                                      width: 18,
-                                      height: 18,
-                                      child: CircularProgressIndicator(
-                                          strokeWidth: 2))
-                                  : const Icon(Icons.add_rounded),
-                            ),
-                            const SizedBox(width: 6),
-                            Expanded(
-                              child: TextField(
-                                controller: _input,
-                                minLines: 1,
-                                maxLines: 4,
-                                textInputAction: TextInputAction.send,
-                                onSubmitted: (_) => _send(),
-                                decoration: InputDecoration(
-                                  hintText: s.chatMessageHint,
-                                  filled: true,
-                                  fillColor: theme
-                                      .colorScheme.surfaceContainerHighest
-                                      .withValues(alpha: .5),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 10),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
+                        child: _recording
+                            ? Row(
+                                children: [
+                                  const Icon(Icons.circle_rounded,
+                                      size: 12, color: Colors.red),
+                                  const SizedBox(width: 8),
+                                  Text(_recLabel,
+                                      style: theme.textTheme.titleMedium),
+                                  const Spacer(),
+                                  IconButton.filledTonal(
+                                    onPressed: _cancelRecording,
+                                    icon: const Icon(
+                                        Icons.delete_outline_rounded),
                                   ),
-                                ),
+                                  const SizedBox(width: 8),
+                                  IconButton.filled(
+                                    onPressed: _sendRecording,
+                                    icon: const Icon(Icons.send_rounded),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  IconButton.filledTonal(
+                                    onPressed:
+                                        _uploading ? null : _openAttachSheet,
+                                    icon: _uploading
+                                        ? const SizedBox(
+                                            width: 18,
+                                            height: 18,
+                                            child: CircularProgressIndicator(
+                                                strokeWidth: 2))
+                                        : const Icon(Icons.add_rounded),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Expanded(
+                                    child: TextField(
+                                      controller: _input,
+                                      minLines: 1,
+                                      maxLines: 4,
+                                      textInputAction: TextInputAction.send,
+                                      onChanged: (_) => setState(() {}),
+                                      onSubmitted: (_) => _send(),
+                                      decoration: InputDecoration(
+                                        hintText: s.chatMessageHint,
+                                        filled: true,
+                                        fillColor: theme
+                                            .colorScheme
+                                            .surfaceContainerHighest
+                                            .withValues(alpha: .5),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 10),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  ValueListenableBuilder<TextEditingValue>(
+                                    valueListenable: _input,
+                                    builder: (_, value, _) {
+                                      final hasText =
+                                          value.text.trim().isNotEmpty;
+                                      return IconButton.filled(
+                                        onPressed: hasText
+                                            ? (_sending ? null : _send)
+                                            : _startRecording,
+                                        icon: _sending
+                                            ? const SizedBox(
+                                                width: 18,
+                                                height: 18,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                        strokeWidth: 2,
+                                                        color: Colors.white))
+                                            : Icon(hasText
+                                                ? Icons.send_rounded
+                                                : Icons.mic_rounded),
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(width: 8),
-                            IconButton.filled(
-                              onPressed: _sending ? null : _send,
-                              icon: _sending
-                                  ? const SizedBox(
-                                      width: 18,
-                                      height: 18,
-                                      child: CircularProgressIndicator(
-                                          strokeWidth: 2,
-                                          color: Colors.white))
-                                  : const Icon(Icons.send_rounded),
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ],
@@ -415,6 +482,87 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     if (dt == null) return '';
     return '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
   }
+
+  Future<void> _startRecording() async {
+    if (_recording) return;
+    try {
+      if (!await _recorder.hasPermission()) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(ref.read(sProvider).micPermissionNeeded)));
+        }
+        return;
+      }
+      final dir = await getTemporaryDirectory();
+      final path =
+          '${dir.path}/voice_${DateTime.now().millisecondsSinceEpoch}.m4a';
+      await _recorder.start(
+        const RecordConfig(encoder: AudioEncoder.aacLc),
+        path: path,
+      );
+      setState(() {
+        _recording = true;
+        _recSecs = 0;
+      });
+      _recTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+        if (mounted) setState(() => _recSecs++);
+      });
+    } catch (_) {}
+  }
+
+  Future<void> _cancelRecording() async {
+    final path = await _recorder.stop();
+    _teardownRecording();
+    if (path != null) {
+      try {
+        await File(path).delete();
+      } catch (_) {}
+    }
+  }
+
+  Future<void> _sendRecording() async {
+    final secs = _recSecs;
+    final path = await _recorder.stop();
+    _teardownRecording();
+    if (path == null) return;
+    if (secs < 1) {
+      try {
+        await File(path).delete();
+      } catch (_) {}
+      return;
+    }
+    setState(() => _uploading = true);
+    try {
+      final bytes = await File(path).readAsBytes();
+      await ref.read(chatRepositoryProvider).sendAttachment(
+            widget.conversationId,
+            kind: 'audio',
+            fileName:
+                'voice_${DateTime.now().millisecondsSinceEpoch}.m4a',
+            bytes: bytes,
+            durationSec: secs,
+          );
+      await _refresh();
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.toString())));
+      }
+    } finally {
+      try {
+        await File(path).delete();
+      } catch (_) {}
+      if (mounted) setState(() => _uploading = false);
+    }
+  }
+
+  void _teardownRecording() {
+    _recTimer?.cancel();
+    if (mounted) setState(() => _recording = false);
+  }
+
+  String get _recLabel =>
+      '${(_recSecs ~/ 60).toString().padLeft(2, '0')}:${(_recSecs % 60).toString().padLeft(2, '0')}';
 }
 
 class _ImageBubble extends StatelessWidget {

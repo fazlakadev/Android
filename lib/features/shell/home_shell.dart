@@ -1,5 +1,8 @@
-﻿import '../../core/i18n/app_i18n.dart';
+﻿import 'dart:async';
+
+import '../../core/i18n/app_i18n.dart';
 import '../../core/push/push_service.dart';
+import '../../core/realtime/realtime_service.dart';
 import '../../core/update/update_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -78,6 +81,8 @@ class _HomeShellState extends ConsumerState<HomeShell>
     try {
       await ref.read(pushInitProvider.notifier).init();
       await ref.read(pushInitProvider.notifier).registerAfterLogin();
+      // Live chat channel (Pusher) — best effort.
+      unawaited(ref.read(realtimeProvider.notifier).start());
       final hasUpdate = await ref.read(updateProvider.notifier).check();
       if (hasUpdate && mounted) {
         await maybeShowUpdateDialog(context, ref);

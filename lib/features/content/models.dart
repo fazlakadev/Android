@@ -430,6 +430,7 @@ class ConversationItem {
     required this.title,
     this.avatarUrl,
     this.lastMessageBody,
+    this.lastMessageType,
     this.lastMessageAt,
     this.unreadCount = 0,
   });
@@ -439,6 +440,7 @@ class ConversationItem {
   final String title;
   final String? avatarUrl;
   final String? lastMessageBody;
+  final String? lastMessageType;
   final DateTime? lastMessageAt;
   final int unreadCount;
 
@@ -457,6 +459,7 @@ class ConversationItem {
               : '@${other?['username'] ?? ''}'),
       avatarUrl: (group?['avatarUrl'] ?? other?['avatarUrl']) as String?,
       lastMessageBody: last?['body'] as String?,
+      lastMessageType: last?['type']?.toString(),
       lastMessageAt: _date(j['updatedAt']),
       unreadCount: _int(j['unreadCount']) ?? 0,
     );

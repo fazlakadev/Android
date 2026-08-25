@@ -77,6 +77,8 @@ abstract class S {
   String get attachAudio;
   String get attachmentTooBig;
 
+  String get micPermissionNeeded;
+
   // Auth
   String get welcomeTitle;
   String get continueWithGoogle;
@@ -252,6 +254,9 @@ class SAr extends S {
   final String attachAudio = 'ملف صوتي';
   @override
   final String attachmentTooBig = 'حجم الملف أكبر من الحد المسموح (10 ميجابايت)';
+
+  @override
+  final String micPermissionNeeded = 'منح إذن المايك لتسجيل الرسائل الصوتية';
   @override
   final String welcomeTitle = 'مرحبًا بك في فضلكة';
   @override
@@ -461,6 +466,9 @@ class SEn extends S {
   final String attachAudio = 'Audio file';
   @override
   final String attachmentTooBig = 'File exceeds the 10 MB limit';
+
+  @override
+  final String micPermissionNeeded = 'Allow microphone access to record voice messages';
   @override
   final String welcomeTitle = 'Welcome to Fazlaka';
   @override
@@ -671,6 +679,9 @@ class SFr extends S {
   final String attachAudio = 'Fichier audio';
   @override
   final String attachmentTooBig = 'Le fichier dépasse la limite de 10 Mo';
+
+  @override
+  final String micPermissionNeeded = "Autorisez l'acc\u00e8s au micro pour enregistrer des messages vocaux";
   @override
   final String welcomeTitle = 'Bienvenue chez Fazlaka';
   @override
